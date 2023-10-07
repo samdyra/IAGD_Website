@@ -1,6 +1,14 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
+/* @Note: Dummy
+ * X8bYpL7sW6zA
+ * 3rTnQv9mP1kX
+ * H5sDfG2jK6lM
+ * L1pRtN7wZ4qE
+ *V9mB2cW6xY8z
+ */
+
 export const exampleRouter = createTRPCRouter({
   validateVoterToken: publicProcedure
     .input(z.object({ voterToken: z.string() }))
