@@ -9,10 +9,10 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
  *V9mB2cW6xY8z
  */
 
-export const exampleRouter = createTRPCRouter({
+export const voteRouter = createTRPCRouter({
   validateVoterToken: publicProcedure
     .input(z.object({ voterToken: z.string() }))
-    .query(async ({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       // Attempt to find a voter with the given voterToken
       const voter = await ctx.prisma.voter.findUnique({
         where: { voterToken: input.voterToken },
@@ -20,7 +20,12 @@ export const exampleRouter = createTRPCRouter({
 
       if (!voter) {
         // Voter token doesn't exist in the database
-        throw new Error("Voter token not found");
+        throw new Error("Voter token not found!");
+      }
+
+      if (voter.hasVoted) {
+        // User has already voted
+        throw new Error("You have already voted!");
       }
 
       const response = {
@@ -47,12 +52,12 @@ export const exampleRouter = createTRPCRouter({
 
       if (!voter) {
         // Voter token doesn't exist in the database
-        throw new Error("Token invalid");
+        throw new Error("Voter token not found!");
       }
 
       if (voter.hasVoted) {
         // User has already voted
-        throw new Error("User already voted");
+        throw new Error("You have already voted!");
       }
 
       // Update the voter's hasVoted and choseCandidateNum

@@ -5,3 +5,7 @@
 .gt {
   @apply inline-block bg-gradient-to-r from-blue-600 via-indigo-600 to-red-600 bg-clip-text text-transparent;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
