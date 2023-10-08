@@ -60,7 +60,6 @@ export default function Vote() {
 const FormInput = () => {
   const [voterToken, setVoterToken] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  console.log(phoneNumber);
 
   const [isChecked, setIsChecked] = useState(false);
 
