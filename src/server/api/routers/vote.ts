@@ -1,26 +1,22 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-/* @Note: Dummy
- * X8bYpL7sW6zA
- * 3rTnQv9mP1kX
- * H5sDfG2jK6lM
- * L1pRtN7wZ4qE
- *V9mB2cW6xY8z
- */
-
 export const voteRouter = createTRPCRouter({
   validateVoterToken: publicProcedure
-    .input(z.object({ voterToken: z.string() }))
+    .input(z.object({ phoneNumber: z.string(), voterToken: z.string() }))
     .mutation(async ({ input, ctx }) => {
       // Attempt to find a voter with the given voterToken
       const voter = await ctx.prisma.voter.findUnique({
-        where: { voterToken: input.voterToken },
+        where: { phoneNumber: input.phoneNumber },
       });
 
       if (!voter) {
         // Voter token doesn't exist in the database
-        throw new Error("Voter token not found!");
+        throw new Error("Voter phone number not found!");
+      }
+
+      if (voter.voterToken !== input.voterToken) {
+        throw new Error("Token not match");
       }
 
       if (voter.hasVoted) {
@@ -52,7 +48,11 @@ export const voteRouter = createTRPCRouter({
 
       if (!voter) {
         // Voter token doesn't exist in the database
-        throw new Error("Voter token not found!");
+        throw new Error("Voter phone number not found!");
+      }
+
+      if (voter.voterToken !== input.voterToken) {
+        throw new Error("Token not match");
       }
 
       if (voter.hasVoted) {

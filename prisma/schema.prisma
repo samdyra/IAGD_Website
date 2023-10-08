@@ -16,6 +16,7 @@ model Voter {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     voterToken String @db.VarChar(255) @unique
+    phoneNumber String @db.VarChar(255) @unique
     hasVoted Boolean @default(false)
     choseCandidateNum Int 
 }

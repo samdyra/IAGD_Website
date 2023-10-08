@@ -3,6 +3,8 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 export default function Vote() {
   return (
@@ -47,7 +49,7 @@ export default function Vote() {
             </div>
           </div>
         </main>
-        <main className="flex h-[500px]  justify-center">
+        <main className="flex h-[720px]  justify-center">
           <FormInput />
         </main>
       </div>
@@ -57,7 +59,12 @@ export default function Vote() {
 
 const FormInput = () => {
   const [voterToken, setVoterToken] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  console.log(phoneNumber);
+
   const [isChecked, setIsChecked] = useState(false);
+
+  const isFormInvalid = voterToken === "" || !phoneNumber;
 
   const { mutate, isLoading: isLoadingVerify } =
     api.vote.validateVoterToken.useMutation({
@@ -70,30 +77,45 @@ const FormInput = () => {
     });
 
   const handleClickVerify = () => {
-    mutate({ voterToken });
+    mutate({ voterToken, phoneNumber });
   };
 
-  const handleApiContractChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVoterToken(event.currentTarget.value);
   };
 
+  const handlePhoneNumberChange = (phoneNumber: string) => {
+    setPhoneNumber(phoneNumber);
+  };
+
   const handleCheckboxChange = () => {
-    // Toggle the current state value
     setIsChecked(!isChecked);
   };
 
   return (
-    <form className="mt-6 w-screen">
-      <div className="mx-auto max-w-[520px] px-5 sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
-        <label className="mb-2 block text-2xl font-semibold text-gray-900 dark:text-white md:mb-3 md:text-2xl lg:text-4xl">
-          Please Enter Your Token
+    <form className="w-screen ">
+      <div className="mx-auto max-w-[520px] px-5  sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
+        <label className="mb-6 block text-2xl font-bold text-gray-900 dark:text-white md:mb-8 md:text-2xl lg:text-4xl">
+          Please enter your phone number and voter token as shown in Voter List
+        </label>
+        <label className="text-md my-2 block font-semibold text-gray-900 dark:text-white md:text-lg ">
+          Phone Number
+        </label>
+        <PhoneInput
+          value={phoneNumber}
+          onChange={handlePhoneNumberChange}
+          className="text-md mb-4 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          defaultCountry="ID"
+          international
+          countryCallingCodeEditable={false}
+        />
+        <label className="text-md my-2 block font-semibold text-gray-900 dark:text-white  md:text-lg ">
+          Voter Token
         </label>
         <input
-          onChange={handleApiContractChange}
-          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-          placeholder="your token"
+          onChange={handleTokenChange}
+          className="text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          placeholder="voter token"
           type="password"
         />
         <div className="my-4 flex items-start justify-center align-middle">
@@ -105,16 +127,19 @@ const FormInput = () => {
           />
           <p className="ml-4  text-sm font-bold text-gray-900 dark:text-gray-300 md:text-lg">
             By checking this box, I sincerely declare that I am the rightful
-            owner of this token.
+            owner of this phone number and token.
           </p>
         </div>
         <button
           type="button"
-          className={`rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto md:text-lg ${
-            isChecked || isLoadingVerify ? "bg-[#FF5C00]" : "bg-slate-800"
+          className={`text-md transition-duration: 150ms; rounded-lg px-5 py-2.5 text-center font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto
+          ${
+            !isChecked || isLoadingVerify || isFormInvalid
+              ? "bg-slate-800"
+              : "bg-[#FF5C00]"
           }`}
           onClick={handleClickVerify}
-          disabled={!isChecked || isLoadingVerify}
+          disabled={!isChecked || isLoadingVerify || isFormInvalid}
         >
           Verify Token
         </button>
