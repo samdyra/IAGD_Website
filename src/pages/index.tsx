@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import logo from "../../public/logo.png";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -27,12 +28,14 @@ export default function Home() {
           </h2>
         </div>
         <div className="mx-auto mt-16 w-fit ">
-          <button
-            type="button"
-            className="bgp mr-4 rounded-lg p-3 font-semibold text-white"
-          >
-            Vote Sekarang
-          </button>
+          <Link href="/vote">
+            <button
+              type="button"
+              className="bgp mr-4 rounded-lg p-3 font-semibold text-white"
+            >
+              Vote Sekarang
+            </button>
+          </Link>
           <button
             type="button"
             className="rounded-lg border border-orange-600 p-3 font-semibold text-[#FF5C00]"
@@ -52,11 +55,13 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between border-2 p-[16px] sm:px-16 lg:px-28">
       <Image src={logo} width={113} alt="logo-iagd"></Image>
-      <div className="bgp flex rounded-lg border px-3 align-middle">
-        <button className="font-semibold text-white" type="button">
-          Vote Sekarang
-        </button>
-      </div>
+      <Link href="/vote">
+        <div className="bgp flex rounded-lg border p-3 align-middle">
+          <button className="font-semibold text-white" type="button">
+            Vote Sekarang
+          </button>
+        </div>
+      </Link>
     </nav>
   );
 };
