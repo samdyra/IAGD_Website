@@ -76,6 +76,10 @@ const FormInput = () => {
     });
 
   const handleClickVerify = () => {
+    setVoterToken("");
+    setPhoneNumber("");
+    setIsChecked(false);
+
     mutate({ voterToken, phoneNumber });
   };
 
@@ -95,7 +99,7 @@ const FormInput = () => {
     <form className="w-screen ">
       <div className="mx-auto max-w-[520px] px-5  sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
         <label className="mb-6 block text-2xl font-bold text-gray-900 dark:text-white md:mb-8 md:text-2xl lg:text-4xl">
-          Please enter your phone number and voter token as shown in Voter List
+          Please enter your phone number and voter token
         </label>
         <label className="text-md my-2 block font-semibold text-gray-900 dark:text-white md:text-lg ">
           Phone Number
@@ -113,6 +117,7 @@ const FormInput = () => {
         </label>
         <input
           onChange={handleTokenChange}
+          value={voterToken}
           className="text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
           placeholder="voter token"
           type="password"
@@ -134,13 +139,13 @@ const FormInput = () => {
           className={`text-md transition-duration: 150ms; rounded-lg px-5 py-2.5 text-center font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto
           ${
             !isChecked || isLoadingVerify || isFormInvalid
-              ? "bg-slate-800"
+              ? "bg-slate-400"
               : "bg-[#FF5C00]"
           }`}
           onClick={handleClickVerify}
           disabled={!isChecked || isLoadingVerify || isFormInvalid}
         >
-          Verify Token
+          {isLoadingVerify ? "Loading..." : "Verify Token"}
         </button>
       </div>
     </form>

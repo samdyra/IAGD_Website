@@ -14,14 +14,12 @@ export const voteRouter = createTRPCRouter({
     .input(z.object({ phoneNumber: z.string(), voterToken: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const ip = ctx.ipAddress;
-      const { success, reset, remaining } = await rateLimit.limit(ip ?? "");
+      const { success, reset } = await rateLimit.limit(ip ?? "");
 
       if (!success) {
         const now = Date.now();
         const retryAfter = Math.floor((reset - now) / 1000);
-        throw new Error(
-          `Too Many Request, retry after ${retryAfter} second, remaining ${remaining}`
-        );
+        throw new Error(`Too Many Request, retry after ${retryAfter} second`);
       }
 
       // Attempt to find a voter with the given voterToken
