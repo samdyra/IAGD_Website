@@ -6,6 +6,18 @@
   @apply inline-block bg-gradient-to-r from-blue-600 via-indigo-600 to-red-600 bg-clip-text text-transparent;
 }
 
+.bgp {
+  @apply bg-[#FF5C00];
+}
+
+.tcp {
+  @apply text-[#FF5C00];
+}
+
+.tcs {
+  @apply text-[#18229B];
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
