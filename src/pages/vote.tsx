@@ -85,9 +85,9 @@ const FormInput = () => {
   };
 
   return (
-    <form className="w-screen">
-      <div className="mx-auto mb-6 w-1/3 ">
-        <label className="mb-6 block text-4xl font-semibold text-gray-900 dark:text-white">
+    <form className="mt-6 w-screen">
+      <div className="mx-auto max-w-[520px] px-5 sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
+        <label className="mb-2 block text-2xl font-semibold text-gray-900 dark:text-white md:mb-3 md:text-2xl lg:text-4xl">
           Please Enter Your Token
         </label>
         <input
@@ -101,16 +101,16 @@ const FormInput = () => {
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
-            className="focus:ring-3 mt-[3px] h-5 w-5 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300"
+            className="focus:ring-3 mt-[3px] h-5 w-5 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300 sm:mt-[4px]"
           />
-          <p className="text-l  ml-4 font-bold text-gray-900 dark:text-gray-300">
+          <p className="ml-4  text-sm font-bold text-gray-900 dark:text-gray-300 md:text-lg">
             By checking this box, I sincerely declare that I am the rightful
             owner of this token.
           </p>
         </div>
         <button
           type="button"
-          className={`rounded-lg  px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto ${
+          className={`rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto md:text-lg ${
             isChecked || isLoadingVerify ? "bg-[#FF5C00]" : "bg-slate-800"
           }`}
           onClick={handleClickVerify}
