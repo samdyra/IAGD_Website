@@ -11,15 +11,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <header className="h-[667px] ">
-        <div className="mt-[100px] ">
-          <h2 className="tcs mb-2 text-center text-lg font-semibold">
+      <div className="h-[667px] rounded-b-[50px] bg-[#D3D4C5] bg-[url('../../public/bgimage.jpeg')] bg-cover bg-[center_top_0] bg-blend-soft-light">
+        <div>
+          <MiscIAGDIcon />
+        </div>
+        <div className="mt-[100px] sm:mt-[125px] ">
+          <h2 className="tcs sm: mb-2 text-center text-lg font-semibold  sm:text-2xl lg:text-3xl">
             SELAMAT DATANG DI
           </h2>
-          <h1 className="tcp mb-2 text-center text-3xl font-bold">
-            Pemilu Ikatan Alumni Geodesi (IAGD) 2023
+          <h1 className="tcp mb-2 text-center text-3xl font-bold sm:text-4xl lg:text-5xl">
+            Pemilu Ikatan Alumni Geodesi <br></br> (IAGD) 2023
           </h1>
-          <h2 className="tcp text-center font-semibold">
+          <h2 className="tcp text-center font-semibold sm:text-2xl lg:text-3xl ">
             Institut Teknologi Bandung
           </h2>
         </div>
@@ -37,14 +40,17 @@ export default function Home() {
             Lihat Kebawah
           </button>
         </div>
-      </header>
+        <div className="mt-[128px] flex rotate-180 justify-start sm:mt-[118px] lg:mt-[95px] ">
+          <MiscIAGDIcon />
+        </div>
+      </div>
     </>
   );
 }
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between border-2 p-[16px]">
+    <nav className="flex justify-between border-2 p-[16px] sm:px-16 lg:px-28">
       <Image src={logo} width={113} alt="logo-iagd"></Image>
       <div className="bgp flex rounded-lg border px-3 align-middle">
         <button className="font-semibold text-white" type="button">
@@ -58,27 +64,27 @@ const Navbar = () => {
 const MiscIAGDIcon = () => {
   return (
     <svg
-      width="188"
-      height="111"
-      viewBox="0 0 188 111"
+      width="113"
+      height="75"
+      viewBox="0 0 113 75"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M72.3098 74.218C72.3247 78.9585 71.4057 83.6555 69.6054 88.0409C67.805 92.4262 65.1586 96.414 61.8171 99.7765C58.4755 103.139 54.5045 105.811 50.1305 107.638C45.7566 109.466 41.0654 110.415 36.3249 110.43L36.2116 74.3314L72.3098 74.218Z"
+        d="M76.1134 -7.74027e-06C76.0985 4.74048 77.0175 9.43748 78.8179 13.8228C80.6182 18.2082 83.2647 22.1959 86.6062 25.5585C89.9477 28.9211 93.9188 31.5925 98.2928 33.4204C102.667 35.2483 107.358 36.1967 112.098 36.2116L112.212 0.113342L76.1134 -7.74027e-06Z"
         fill="#FF5C00"
       />
       <path
-        d="M115.113 36.0983C115.098 40.8387 116.017 45.5357 117.818 49.9211C119.618 54.3064 122.265 58.2942 125.606 61.6568C128.948 65.0193 132.919 67.6908 137.293 69.5187C141.667 71.3465 146.358 72.295 151.098 72.3098L151.212 36.2116L115.113 36.0983Z"
-        fill="#FF5C00"
+        d="M74.0982 -7.74027e-06C74.1131 4.74048 73.1942 9.43748 71.3938 13.8228C69.5935 18.2082 66.947 22.1959 63.6055 25.5585C60.264 28.9211 56.2929 31.5925 51.9189 33.4204C47.545 35.2483 42.8538 36.1967 38.1134 36.2116L38 0.113342L74.0982 -7.74027e-06Z"
+        fill="#18229B"
       />
       <path
-        d="M36.1133 72.3249C36.0984 67.5844 37.0173 62.8874 38.8177 58.5021C40.6181 54.1168 43.2645 50.129 46.606 46.7664C49.9475 43.4039 53.9186 40.7324 58.2926 38.9045C62.6665 37.0767 67.3577 36.1282 72.0982 36.1133L72.2115 72.2116L36.1133 72.3249Z"
+        d="M0.113427 36.2116C0.0985418 31.4711 1.01751 26.7741 2.81786 22.3888C4.61822 18.0035 7.2647 14.0157 10.6062 10.6531C13.9477 7.29055 17.9188 4.61907 22.2927 2.79121C26.6667 0.963355 31.3578 0.014909 36.0983 2.38461e-05L36.2117 36.0983L0.113427 36.2116Z"
         fill="#DDDED6"
       />
       <path
-        d="M109.31 36.0983C109.325 40.8387 108.406 45.5357 106.605 49.9211C104.805 54.3064 102.159 58.2942 98.8171 61.6568C95.4755 65.0193 91.5045 67.6908 87.1305 69.5187C82.7566 71.3465 78.0654 72.295 73.3249 72.3098L73.2116 36.2116L109.31 36.0983Z"
-        fill="#18229B"
+        d="M36.0982 38C36.1131 42.7405 35.1942 47.4375 33.3938 51.8228C31.5935 56.2082 28.947 60.1959 25.6055 63.5585C22.264 66.9211 18.2929 69.5925 13.9189 71.4204C9.54498 73.2483 4.85384 74.1967 0.11335 74.2116L7.62936e-06 38.1133L36.0982 38Z"
+        fill="#FF5C00"
       />
     </svg>
   );
