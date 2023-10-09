@@ -16,7 +16,15 @@ export default function Vote() {
       </Head>
       <div className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-indigo-100 via-[#b6bfcb] to-white">
         <main className="flex min-h-screen flex-col items-center justify-center bg-opacity-20 bg-[url('../../public/gridbg.png')]">
-          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+          <div className="flex shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
+            <div className="rounded-l-xl border-2 border-black px-7 py-2">
+              <h1 className="">Ready to vote?</h1>
+            </div>
+            <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2">
+              <h1 className="">Click here!</h1>
+            </div>
+          </div>
+          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-5">
             <h1 className="max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
               Welcome Kamerads, to
               <span className="text-[#FF5C00]"> IAGD</span> Election
@@ -24,7 +32,7 @@ export default function Vote() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
               <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-black/5 p-4 text-gray-800 hover:bg-black/10 "
+                className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:bg-[#a3b3e43f]"
                 href="/"
                 target="_blank"
               >
@@ -32,19 +40,19 @@ export default function Vote() {
                   Haven&apos;t receive token yet? →
                 </h3>
                 <div className="text-lg">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Provident, ea!
+                  Do you want to vote, but dont have voter token yet? Click here
+                  to contact Felia!
                 </div>
               </Link>
               <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-black/5 p-4 text-gray-800 hover:bg-black/10"
+                className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#FF5C00] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl  hover:bg-[#a3b3e43f]"
                 href="/"
                 target="_blank"
               >
-                <h3 className="text-xl font-bold">See the candidates →</h3>
+                <h3 className="text-xl font-bold">Study the candidates →</h3>
                 <div className="text-lg">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Animi, rem!
+                  Learn more about all the candidates to make sure you chose the
+                  best candidate.
                 </div>
               </Link>
             </div>
