@@ -5,8 +5,25 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { AnimatePresence, motion } from "framer-motion";
+
+type Steps = "initial" | "verify" | "voting";
+type HandleSetStep = (step: Steps) => void;
 
 export default function Vote() {
+  const [step, setStep] = useState<Steps>("initial");
+  const handleSetStep = (step: Steps) => setStep(step);
+
+  const currentPage = (step: Steps) => {
+    const availablePage: Record<Steps, React.ReactNode> = {
+      initial: <WelcomingPage handleSetStep={handleSetStep} />,
+      verify: <FormInputValidation handleSetStep={handleSetStep} />,
+      voting: <FormInputVoting handleSetStep={handleSetStep} />,
+    };
+
+    return availablePage[step];
+  };
+
   return (
     <>
       <Head>
@@ -16,60 +33,76 @@ export default function Vote() {
       </Head>
       <div className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-indigo-100 via-[#b6bfcb] to-white">
         <main className="flex min-h-screen flex-col items-center justify-center bg-opacity-20 bg-[url('../../public/gridbg.png')]">
-          <div className="flex shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
-            <div className="rounded-l-xl border-2 border-black px-7 py-2">
-              <h1 className="">Ready to vote?</h1>
-            </div>
-            <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2">
-              <h1 className="">Click here!</h1>
-            </div>
-          </div>
-          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-5">
-            <h1 className="max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
-              Welcome Kamerads, to
-              <span className="text-[#FF5C00]"> IAGD</span> Election
-            </h1>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:bg-[#a3b3e43f]"
-                href="/"
-                target="_blank"
-              >
-                <h3 className="text-xl font-bold">
-                  Haven&apos;t receive token yet? →
-                </h3>
-                <div className="text-lg">
-                  Do you want to vote, but dont have voter token yet? Click here
-                  to contact Felia!
-                </div>
-              </Link>
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#FF5C00] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl  hover:bg-[#a3b3e43f]"
-                href="/"
-                target="_blank"
-              >
-                <h3 className="text-xl font-bold">Study the candidates →</h3>
-                <div className="text-lg">
-                  Learn more about all the candidates to make sure you chose the
-                  best candidate.
-                </div>
-              </Link>
-            </div>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+            >
+              {currentPage(step)}
+            </motion.div>
+          </AnimatePresence>
         </main>
-        {/* <section className="flex h-[560px]  justify-center">
-          <FormInputValidation />
-        </section>
-        <section className="flex h-[1024px] justify-center">
-          <FormInputVoting />
-        </section> */}
       </div>
     </>
   );
 }
 
-const FormInputValidation = () => {
+type Props = {
+  handleSetStep: HandleSetStep;
+};
+
+const WelcomingPage = ({ handleSetStep }: Props) => (
+  <>
+    <div className="container flex flex-col items-center justify-center gap-12 px-4 py-5">
+      <h1 className="max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
+        Welcome Kamerads, to
+        <span className="text-[#FF5C00]"> IAGD</span> Election
+      </h1>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+        <Link
+          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:bg-[#a3b3e43f]"
+          href="/"
+          target="_blank"
+        >
+          <h3 className="text-xl font-bold">
+            Haven&apos;t receive token yet? →
+          </h3>
+          <div className="text-lg">
+            Do you want to vote, but dont have voter token yet? Click here to
+            contact Felia!
+          </div>
+        </Link>
+        <Link
+          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#FF5C00] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl  hover:bg-[#a3b3e43f]"
+          href="/"
+          target="_blank"
+        >
+          <h3 className="text-xl font-bold">Study the candidates →</h3>
+          <div className="text-lg">
+            Learn more about all the candidates to make sure you chose the best
+            candidate.
+          </div>
+        </Link>
+      </div>
+    </div>
+    <div className="mx-auto mt-8 flex w-80 shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
+      <div className="rounded-l-xl border-2 border-black px-7 py-2">
+        <h1 className="">Ready to vote?</h1>
+      </div>
+      <div
+        className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2"
+        onClick={() => handleSetStep("verify")}
+      >
+        <h1 className="">Click here!</h1>
+      </div>
+    </div>
+  </>
+);
+
+const FormInputValidation = ({ handleSetStep }: Props) => {
   const [voterToken, setVoterToken] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
@@ -81,6 +114,7 @@ const FormInputValidation = () => {
     api.vote.validateVoterToken.useMutation({
       onSuccess: () => {
         toast.success("Welcome!");
+        handleSetStep("voting");
       },
       onError: (err) => {
         toast.error(err.message);
@@ -109,9 +143,10 @@ const FormInputValidation = () => {
 
   return (
     <form className="w-screen ">
-      <div className="mx-auto max-w-[520px] px-5  sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
+      <div className="mx-auto max-w-[520px] px-6  sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
         <label className="mb-6 block text-2xl font-bold text-gray-900 dark:text-gray-800 md:mb-8 md:text-2xl lg:text-4xl">
-          Please enter your phone number and voter token
+          Please enter your <span className="text-[#FF5C00]">phone number</span>{" "}
+          and <span className="text-[#FF5C00]">voter token</span>
         </label>
         <label className="text-md my-2 block font-semibold text-gray-900 dark:text-gray-800 md:text-lg ">
           Phone Number
@@ -141,14 +176,14 @@ const FormInputValidation = () => {
             onChange={handleCheckboxChange}
             className="focus:ring-3 mt-[3px] h-5 w-5 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300 sm:mt-[4px]"
           />
-          <p className="ml-4  text-sm font-bold text-gray-900 dark:text-gray-300 md:text-lg">
+          <p className="ml-4  text-sm font-bold text-gray-900  md:text-lg">
             By checking this box, I sincerely declare that I am the rightful
             owner of this phone number and token.
           </p>
         </div>
         <button
           type="button"
-          className={`text-md transition-duration: 150ms; rounded-lg px-5 py-2.5 text-center font-medium text-gray-800 hover:bg-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto
+          className={`text-md transition-duration: 150ms; rounded-lg px-5 py-2.5 text-center font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto
           ${
             !isChecked || isLoadingVerify || isFormInvalid
               ? "bg-slate-400"
@@ -179,7 +214,7 @@ const candidateExample = [
   },
 ];
 
-const FormInputVoting = () => {
+const FormInputVoting = ({ handleSetStep }: Props) => {
   return (
     <div>
       <h1 className="mb-4 text-center text-3xl font-semibold text-gray-800">
