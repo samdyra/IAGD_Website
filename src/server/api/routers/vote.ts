@@ -29,11 +29,11 @@ export const voteRouter = createTRPCRouter({
 
       if (!voter) {
         // Voter token doesn't exist in the database
-        throw new Error("Voter phone number not found!");
+        throw new Error("Phone number not found!");
       }
 
       if (voter.voterToken !== input.voterToken) {
-        throw new Error("Token not match");
+        throw new Error("Token not match, please check your token again!");
       }
 
       if (voter.hasVoted) {

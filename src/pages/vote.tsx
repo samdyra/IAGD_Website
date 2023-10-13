@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Link from "next/link";
 import { api } from "~/utils/api";
@@ -169,14 +170,16 @@ const FormInputValidation = ({ handleSetStep }: Props) => {
           placeholder="voter token"
           type="password"
         />
-        <div className="my-4 flex items-start justify-center align-middle">
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-            className="focus:ring-3 mt-[3px] h-5 w-5 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300 sm:mt-[4px]"
-          />
-          <p className="ml-4  text-sm font-bold text-gray-900  md:text-lg">
+        <div className="my-4 flex items-start justify-center  ">
+          <div className="mr-4 mt-[2px]">
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+              className="h-6 w-6"
+            />
+          </div>
+          <p className="text-sm font-bold text-gray-900  md:text-lg">
             By checking this box, I sincerely declare that I am the rightful
             owner of this phone number and token.
           </p>
@@ -215,42 +218,69 @@ const candidateExample = [
 ];
 
 const FormInputVoting = ({ handleSetStep }: Props) => {
+  const [selectNum, setSelectNum] = useState(0);
+
+  const handleSelectNum = (numCandidate: number) => {
+    setSelectNum(numCandidate);
+  };
+
   return (
-    <div>
-      <h1 className="mb-4 text-center text-3xl font-semibold text-gray-800">
-        Daftar Kandidat
-      </h1>
-      <div className="">
-        {candidateExample.map((candidate, idx) => (
-          <div key={idx} className="mb-6 text-center">
-            <div className="h-[420px] w-[280px] rounded-3xl bg-white/10 p-5  text-gray-800 hover:bg-white/20">
-              <div className="h-3/5 rounded-lg border-2">
-                <UserPlaceholder />
+    <>
+      <div className="mb-36 mt-16 md:mt-8 lg:mt-16">
+        <h1 className="mb-4 px-4 text-center text-3xl font-bold text-gray-800 md:text-4xl">
+          Vote <span className="text-[#FF5C00]">Kandidat</span> Pilihanmu!
+        </h1>
+        <div className="mx-auto mb-4 w-56 cursor-pointer rounded-lg border-2 border-[#FF5C00] bg-[#d2daf43f] p-2 shadow-2xl hover:bg-[#a3b3e43f]">
+          <h1 className="text-center  text-sm font-semibold text-gray-800">
+            Belum yakin? Klik disini untuk mempelajari para kandidat
+          </h1>
+        </div>
+        <div className="mt-8 md:flex md:gap-8 lg:gap-16">
+          {candidateExample.map((candidate, idx) => {
+            const isSelected = candidate.num === selectNum;
+
+            return (
+              <div
+                className="mx-auto mb-6 aspect-[3/4] h-[420px] cursor-pointer rounded-3xl border-2 border-black bg-[#FF5C00] p-5 text-gray-800 hover:opacity-80 md:h-[450px]"
+                key={idx}
+                onClick={() => handleSelectNum(candidate.num)}
+              >
+                <div className="absolute h-12 w-12 rounded-full border-4 border-black bg-white">
+                  {isSelected && (
+                    <h1 className="ml-1 text-3xl font-bold text-green-700">
+                      ✓
+                    </h1>
+                  )}
+                </div>
+                <img
+                  alt="user"
+                  className="relative z-10 mx-auto mt-2 aspect-[1/1] h-[160px] overflow-hidden rounded-full border-2"
+                  src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                ></img>
+                <div className="relative -top-[40px] h-[250px] w-full rounded-lg   border-gray-800 bg-white px-5 pt-12 shadow-md backdrop-blur-md md:h-[280px]">
+                  <h1 className="z-30 text-center text-lg  text-gray-900">
+                    Nomor Urut {candidate.num}
+                  </h1>
+                  <h1 className="z-30 text-center text-lg font-bold text-gray-900 md:mt-4 md:text-2xl">
+                    {candidate.name}
+                  </h1>
+                  <p className="z-30 mt-3 text-center  text-lg italic text-gray-900 md:text-xl">
+                    &quot;{candidate.vision}&quot;
+                  </p>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
       </div>
-    </div>
+      <div className="fixed bottom-0 left-0 right-0 z-40 h-16 w-full  bg-white/30 shadow-md backdrop-blur-md" />
+      <div className="fixed inset-x-0 bottom-8 z-40 mx-auto h-16 w-60 cursor-pointer rounded-lg bg-[#18229B] hover:opacity-80">
+        <h1 className="mt-4 text-center text-lg font-bold text-white">
+          {selectNum === 0
+            ? "Klik salah satu kandidat"
+            : `Konfirmasi Pilih Nomor ${selectNum}`}
+        </h1>
+      </div>
+    </>
   );
 };
-
-const UserPlaceholder = () => (
-  <div className="mt-6 flex justify-center">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.0"
-      width="150"
-      height="150"
-    >
-      <path
-        fill="#ccc"
-        d="M 104.68731,56.689353 C 102.19435,80.640493 93.104981,97.26875 74.372196,97.26875 55.639402,97.26875 46.988823,82.308034 44.057005,57.289941 41.623314,34.938838 55.639402,15.800152 74.372196,15.800152 c 18.732785,0 32.451944,18.493971 30.315114,40.889201 z"
-      />
-      <path
-        fill="#ccc"
-        d="M 92.5675 89.6048 C 90.79484 93.47893 89.39893 102.4504 94.86478 106.9039 C 103.9375 114.2963 106.7064 116.4723 118.3117 118.9462 C 144.0432 124.4314 141.6492 138.1543 146.5244 149.2206 L 4.268444 149.1023 C 8.472223 138.6518 6.505799 124.7812 32.40051 118.387 C 41.80992 116.0635 45.66513 113.8823 53.58659 107.0158 C 58.52744 102.7329 57.52583 93.99267 56.43084 89.26926 C 52.49275 88.83011 94.1739 88.14054 92.5675 89.6048 z"
-      />
-    </svg>
-  </div>
-);
