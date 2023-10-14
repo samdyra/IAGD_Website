@@ -2,8 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import bgimage from "../../public/bgimage.jpeg";
-import phone from "../../public/Phone.svg";
-import { Children, type ReactElement, useState } from "react";
+import phone from "../../public/Phone.png";
 import Link from "next/link";
 import { type StaticImageData } from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -12,13 +11,6 @@ import useModalState from "~/hooks/useModalState";
 import Modal from "~/component/modal";
 
 export default function Home() {
-  const imageCardsData = [
-    { id: 1, imageUrl: "url1", title: "Title 1", description: "Description 1" },
-    { id: 2, imageUrl: "url2", title: "Title 2", description: "Description 2" },
-    { id: 3, imageUrl: "url3", title: "Title 3", description: "Description 3" },
-    { id: 4, imageUrl: "url4", title: "Title 4", description: "Description 4" },
-  ];
-
   return (
     <>
       <Head>
@@ -33,13 +25,13 @@ export default function Home() {
             <MiscIAGDIcon />
           </div>
           <div className="mt-[100px] sm:mt-[125px] ">
-            <h2 className="tcs sm: mb-2 text-center text-lg font-semibold  sm:text-2xl sm:text-3xl">
+            <h2 className="tcs sm: mb-2 text-center text-lg font-semibold  sm:text-2xl">
               SELAMAT DATANG DI
             </h2>
-            <h1 className="tcp mb-2 text-center text-3xl font-bold sm:text-4xl sm:text-5xl">
+            <h1 className="tcp mb-2 text-center text-3xl font-bold sm:text-4xl ">
               Pemilu Ikatan Alumni Geodesi <br></br> (IAGD) 2023
             </h1>
-            <h2 className="tcp text-center font-semibold sm:text-2xl sm:text-3xl ">
+            <h2 className="tcp text-center font-semibold sm:text-2xl ">
               Institut Teknologi Bandung
             </h2>
           </div>
@@ -59,7 +51,7 @@ export default function Home() {
               Lihat Kebawah
             </button>
           </div>
-          <div className="mt-[128px] flex rotate-180 justify-start sm:mt-[118px] sm:mt-[95px] ">
+          <div className="mt-[128px] flex rotate-180 justify-start sm:mt-[118px]">
             <MiscIAGDIcon />
           </div>
         </div>
@@ -270,7 +262,7 @@ export default function Home() {
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between border-2 p-[16px] sm:px-16 sm:px-28">
+    <nav className="flex justify-between border-2 p-[16px] sm:px-16">
       <Image src={logo} width={113} alt="logo-iagd"></Image>
       <Link href="/vote">
         <div className="bgp flex rounded-lg border p-3 align-middle">
