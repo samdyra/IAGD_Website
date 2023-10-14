@@ -89,14 +89,14 @@ const WelcomingPage = ({ handleSetStep }: Props) => (
         </Link>
       </div>
     </div>
-    <div className="mx-auto mt-8 flex w-80 shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
+    <div
+      className="mx-auto mt-8  flex w-fit  shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
+      onClick={() => handleSetStep("verify")}
+    >
       <div className="rounded-l-xl border-2 border-black px-7 py-2">
         <h1 className="">Ready to vote?</h1>
       </div>
-      <div
-        className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2"
-        onClick={() => handleSetStep("verify")}
-      >
+      <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2">
         <h1 className="">Click here!</h1>
       </div>
     </div>
