@@ -1,9 +1,24 @@
 import Head from "next/head";
 import Image from "next/image";
 import logo from "../../public/logo.png";
+import bgimage from "../../public/bgimage.jpeg";
+import phone from "../../public/Phone.svg";
+import { Children, type ReactElement, useState } from "react";
 import Link from "next/link";
+import { type StaticImageData } from "next/image";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import useModalState from "~/hooks/useModalState";
+import Modal from "~/component/modal";
 
 export default function Home() {
+  const imageCardsData = [
+    { id: 1, imageUrl: "url1", title: "Title 1", description: "Description 1" },
+    { id: 2, imageUrl: "url2", title: "Title 2", description: "Description 2" },
+    { id: 3, imageUrl: "url3", title: "Title 3", description: "Description 3" },
+    { id: 4, imageUrl: "url4", title: "Title 4", description: "Description 4" },
+  ];
+
   return (
     <>
       <Head>
@@ -12,39 +27,241 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="h-[667px] rounded-b-[50px] bg-[#D3D4C5] bg-[url('../../public/bgimage.jpeg')] bg-cover bg-[center_top_0] bg-blend-soft-light">
-        <div>
-          <MiscIAGDIcon />
-        </div>
-        <div className="mt-[100px] sm:mt-[125px] ">
-          <h2 className="tcs sm: mb-2 text-center text-lg font-semibold  sm:text-2xl lg:text-3xl">
-            SELAMAT DATANG DI
-          </h2>
-          <h1 className="tcp mb-2 text-center text-3xl font-bold sm:text-4xl lg:text-5xl">
-            Pemilu Ikatan Alumni Geodesi <br></br> (IAGD) 2023
-          </h1>
-          <h2 className="tcp text-center font-semibold sm:text-2xl lg:text-3xl ">
-            Institut Teknologi Bandung
-          </h2>
-        </div>
-        <div className="mx-auto mt-16 w-fit ">
-          <Link href="/vote">
+      <div className="bgs h-max w-full">
+        <div className="h-[667px] rounded-b-[50px] bg-[#D3D4C5] bg-[url('../../public/bgimage.jpeg')] bg-cover bg-[center_top_0] bg-blend-soft-light">
+          <div>
+            <MiscIAGDIcon />
+          </div>
+          <div className="mt-[100px] sm:mt-[125px] ">
+            <h2 className="tcs sm: mb-2 text-center text-lg font-semibold  sm:text-2xl sm:text-3xl">
+              SELAMAT DATANG DI
+            </h2>
+            <h1 className="tcp mb-2 text-center text-3xl font-bold sm:text-4xl sm:text-5xl">
+              Pemilu Ikatan Alumni Geodesi <br></br> (IAGD) 2023
+            </h1>
+            <h2 className="tcp text-center font-semibold sm:text-2xl sm:text-3xl ">
+              Institut Teknologi Bandung
+            </h2>
+          </div>
+          <div className="mx-auto mt-16 w-fit ">
+            <Link href="/vote">
+              <button
+                type="button"
+                className="bgp mr-4 rounded-lg p-3 font-semibold text-white"
+              >
+                Vote Sekarang
+              </button>
+            </Link>
             <button
               type="button"
-              className="bgp mr-4 rounded-lg p-3 font-semibold text-white"
+              className="rounded-lg border border-orange-600 p-3 font-semibold text-[#FF5C00]"
             >
+              Lihat Kebawah
+            </button>
+          </div>
+          <div className="mt-[128px] flex rotate-180 justify-start sm:mt-[118px] sm:mt-[95px] ">
+            <MiscIAGDIcon />
+          </div>
+        </div>
+      </div>
+      <MilestoneElement />
+      <div className="container mx-auto">
+        <h2 className="tcs pt-8 text-center text-2xl font-semibold">
+          Sambutan Ketua Umum IAGD <br /> 2020-2023
+        </h2>
+        <CardComponent
+          description={cardData.body}
+          badge={cardData.badge}
+          heading={cardData.heading}
+          subheading={cardData.subheading}
+        />
+      </div>
+      <div className="bgs p-8">
+        <div className="container mx-auto  gap-4 sm:flex sm:justify-between">
+          <ProfileCard
+            visi={cardData2.body}
+            badge={cardData2.badge}
+            heading={cardData2.heading}
+            subheading={cardData2.subheading}
+          />
+          <ProfileCard
+            visi={cardData2.body}
+            badge={cardData2.badge}
+            heading={cardData2.heading}
+            subheading={cardData2.subheading}
+          />
+          <ProfileCard
+            visi={cardData2.body}
+            badge={cardData2.badge}
+            heading={cardData2.heading}
+            subheading={cardData2.subheading}
+          />
+        </div>
+      </div>
+      <div className="container mx-auto  my-24 gap-4 sm:flex sm:justify-between">
+        <Splide
+          options={{
+            rewind: true,
+            // wheel: true,
+            lazyLoad: true,
+            // isNavigation: true,
+            pagination: true,
+            breakpoints: {
+              2000: {
+                perPage: 4,
+                gap: 20,
+              },
+              1200: {
+                perPage: 3,
+                gap: 20,
+                width: 1100,
+              },
+              1018: {
+                perPage: 2,
+                gap: 0,
+                width: 1000,
+              },
+              640: {
+                perPage: 1,
+                gap: 0,
+              },
+            },
+          }}
+          aria-label="React Splide Example"
+          className="splide mx-auto flex w-full justify-center "
+        >
+          <SplideSlide className="flex w-full justify-center ">
+            <ImageCard />
+          </SplideSlide>
+          <SplideSlide className="flex w-full justify-center ">
+            <ImageCard />
+          </SplideSlide>
+          <SplideSlide className="flex w-full justify-center ">
+            <ImageCard />
+          </SplideSlide>
+          <SplideSlide className="flex w-full justify-center ">
+            <ImageCard />
+          </SplideSlide>
+        </Splide>
+      </div>
+      <div className="container mx-auto   flex flex-col-reverse  gap-4 sm:flex-row sm:justify-between">
+        <div className="flex w-full items-center justify-center sm:w-2/5 ">
+          <Image
+            src={phone}
+            alt="phone"
+            width={100}
+            height={100}
+            className="h-full w-auto sm:mx-auto"
+          />
+        </div>
+        <div className=" w-full sm:w-3/5">
+          <div className="tcs mb-4  p-8 pt-24  text-center sm:text-left ">
+            <h2 className=" mb-8 text-4xl font-bold sm:text-6xl ">
+              AYO MEMILIH!
+            </h2>
+            <p className="text-base sm:text-lg ">
+              Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum
+              sit nunc in eros scelerisque sed. Commodo in viverra nunc,
+              ullamcorper ut. Non, amet, aliquet scelerisque nullam sagittis,
+              pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo
+              eleifend ultricies purus iaculis.
+            </p>
+            <button className="   bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white">
               Vote Sekarang
             </button>
-          </Link>
-          <button
-            type="button"
-            className="rounded-lg border border-orange-600 p-3 font-semibold text-[#FF5C00]"
-          >
-            Lihat Kebawah
-          </button>
+          </div>
         </div>
-        <div className="mt-[128px] flex rotate-180 justify-start sm:mt-[118px] lg:mt-[95px] ">
-          <MiscIAGDIcon />
+      </div>
+
+      <div className="bgp h-max w-full p-4">
+        <div className="container mx-auto h-full">
+          <div className=" flex w-full items-center justify-between border-b border-b-white  py-12">
+            <div className="rounded-lg bg-white p-1">
+              <Image src={logo} width={113} alt="logo-iagd"></Image>
+            </div>
+            <Link href="/vote">
+              <button
+                className="tcp flex rounded-lg border bg-white p-4   align-middle font-semibold"
+                type="button"
+              >
+                0821893897 (Amal)
+              </button>
+            </Link>
+          </div>
+
+          <div className=" flex w-full flex-col items-center justify-between pt-4 text-white  sm:flex-row">
+            <p className="text-xs ">IAGD ITB @ 2023. All rights reserved.</p>
+            <div className="my-6 flex items-center justify-center gap-6">
+              <a
+                className="text-white hover:text-blue-600"
+                aria-label="Visit TrendyMinds LinkedIn"
+                href=""
+                target="_blank"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  className="h-6"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                className="text-white hover:text-blue-600"
+                aria-label="Visit TrendyMinds Facebook"
+                href=""
+                target="_blank"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 320 512"
+                  className="h-6"
+                >
+                  <path
+                    fill="currentColor"
+                    d="m279.14 288 14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                className="text-white hover:text-blue-600"
+                aria-label="Visit TrendyMinds Instagram"
+                href=""
+                target="_blank"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  className="h-6"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                className="text-white hover:text-blue-600"
+                aria-label="Visit TrendyMinds Twitter"
+                href=""
+                target="_blank"
+              >
+                <svg
+                  className="h-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -53,7 +270,7 @@ export default function Home() {
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between border-2 p-[16px] sm:px-16 lg:px-28">
+    <nav className="flex justify-between border-2 p-[16px] sm:px-16 sm:px-28">
       <Image src={logo} width={113} alt="logo-iagd"></Image>
       <Link href="/vote">
         <div className="bgp flex rounded-lg border p-3 align-middle">
@@ -92,5 +309,357 @@ const MiscIAGDIcon = () => {
         fill="#FF5C00"
       />
     </svg>
+  );
+};
+
+const MilestoneElement: React.FC = () => {
+  interface ElectionEvent {
+    date: string;
+    description: string;
+  }
+
+  const electionTimeline: ElectionEvent[] = [
+    {
+      date: "14 Agustus - 26 Agustus 2023",
+      description: "Pensuasanaan Pemilu IAGD 2023",
+    },
+    {
+      date: "27 Agustus - 10 September 2023",
+      description: "Periode Pendaftaran Bakal Calon Pendaftaran Pemilih",
+    },
+    {
+      date: "11 September - 17 September 2023",
+      description: "Verifikasi, Penetapan Calon Verifikasi, & Pengumuman DPT",
+    },
+    {
+      date: "18 September - 1 Oktober 2023",
+      description: "Kampanye & Hearing",
+    },
+    { date: "2 Oktober - 7 Oktober 2023", description: "Masa Tenang" },
+    {
+      date: "8 Oktober 2023",
+      description: "Pemungutan Suara Verifikasi & Pengumuman Ketua",
+    },
+  ];
+
+  return (
+    <div className="bgs">
+      <div className=" container mx-auto py-4">
+        <div className="mb-4 p-8  text-center text-white ">
+          <h2 className=" mb-4 text-2xl font-bold">Alur Pemilu</h2>
+          <p>
+            Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum
+            sit nunc in eros scelerisque sed. Commodo in viverra nunc,
+            ullamcorper ut. Non, amet, aliquet scelerisque nullam sagittis,
+            pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo
+            eleifend ultricies purus iaculis.
+          </p>
+        </div>
+
+        <div className="text relative flex h-96 w-full flex-col justify-between  px-10 sm:flex-row sm:items-center sm:px-0">
+          <div className="absolute inset-0 top-1/2 mx-auto h-5/6 w-1 -translate-y-1/2 transform bg-white sm:h-1 sm:w-5/6"></div>
+
+          {electionTimeline.map((event, idx) => (
+            <div
+              key={idx}
+              className="relative mx-auto flex h-14 w-full items-center justify-center sm:h-44  sm:w-36 sm:flex-col"
+            >
+              <h3 className=" sm:text-xxs w-5/12   text-center text-xs font-semibold text-white sm:h-16 sm:w-full sm:pt-4 lg:text-base">
+                {event.date}
+              </h3>
+              <div className="relative  flex h-16 w-16 items-center justify-center sm:mb-0 sm:h-12 sm:w-12">
+                <div className="bgp absolute h-6 w-6 rounded-full sm:h-6 sm:w-6"></div>
+              </div>
+
+              <p className="sm:text-xxs w-5/12 text-center text-xs  text-white sm:h-16 sm:w-full">
+                {event.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const cardData = {
+  body: "Malesuada facilisi libero, nam eu. Quis pellentesque tortor a elementum ut blandit sed pellentesque arcu. Malesuada in faucibus risus velit diam. Non, massa ut a arcu, fermentum, vel interdum.",
+  badge: logo, // Assuming the logo.png is in the public directory
+  heading: "Muhammad Faizin",
+  subheading: "Ketua IAGD Periode 2020-2023",
+};
+
+const cardData2 = {
+  body: "Malesuada facilisi libero, nam eu. Quis pellentesque tortor a elementum ut blandit sed pellentesque arcu. Malesuada in faucibus risus velit diam. Non, massa ut a arcu, fermentum, vel interdum.",
+  badge: bgimage, // Assuming the logo.png is in the public directory
+  heading: "Muhammad Faizin",
+  subheading: "Ketua IAGD Periode 2020-2023",
+};
+
+interface CardProps {
+  description: string;
+  badge: StaticImageData;
+  heading: string;
+  subheading: string;
+}
+
+const CardComponent: React.FC<CardProps> = ({
+  description,
+  badge,
+  heading,
+  subheading,
+}) => {
+  return (
+    <div className="bgp mx-auto my-10 w-5/6 max-w-6xl overflow-hidden rounded-lg p-8 text-white shadow-lg">
+      <p className="mb-2 text-center text-base">{description}</p>
+
+      <Image
+        src={badge}
+        alt="Badge"
+        width={20}
+        height={20}
+        className="mx-auto h-20 w-20 rounded-full"
+      />
+      <div className="px-6 py-4">
+        <div className="mb-2 text-center text-xl font-bold">{heading}</div>
+        <p className="text-center text-sm ">{subheading}</p>
+      </div>
+    </div>
+  );
+};
+
+interface ProfileCardProps {
+  visi: string;
+  badge: StaticImageData;
+  heading: string;
+  subheading: string;
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({
+  visi,
+  badge,
+  heading,
+  subheading,
+}) => {
+  const [isModalVisible, handleShowModal, handleHideModal] =
+    useModalState(false);
+
+  return (
+    <>
+      <Modal
+        isModalVisible={isModalVisible}
+        handleHideModal={handleHideModal}
+        modalName="profile"
+        y="40%"
+      >
+        <div className="flex w-full flex-col justify-start p-4">
+          <h3 className="tcs text-center text-lg">{heading}</h3>
+          <h4 className="text-center text-sm">{subheading}</h4>
+          <div className="my-6 flex items-center justify-center gap-6">
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds LinkedIn"
+              href=""
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                className="h-6"
+              >
+                <path
+                  fill="currentColor"
+                  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds Facebook"
+              href=""
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                className="h-6"
+              >
+                <path
+                  fill="currentColor"
+                  d="m279.14 288 14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds Instagram"
+              href=""
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                className="h-6"
+              >
+                <path
+                  fill="currentColor"
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds Twitter"
+              href=""
+              target="_blank"
+            >
+              <svg
+                className="h-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <h4 className="tcp text-center">Visi</h4>
+          <p>{visi}</p>
+          <h4 className="tcp text-center">Misi</h4>
+          <ul className="max-w-md list-inside list-disc space-y-1 ">
+            <li>At least 10 characters (and up to 100 characters)</li>
+            <li>At least one lowercase character</li>
+            <li>Inclusion of at least one special </li>
+          </ul>
+        </div>
+      </Modal>
+      <div className="my-4 flex w-full flex-col items-center justify-center rounded-lg bg-white shadow-lg md:w-96">
+        <Image
+          src={badge.src}
+          alt="Profile Badge"
+          title="Profile Badge"
+          width={20}
+          height={20}
+          className="h-auto w-full rounded-t-lg object-cover"
+        />
+        <div className="flex w-full flex-col justify-start p-4">
+          <h3 className="tcs text-center text-lg">{heading}</h3>
+          <h4 className="text-center text-sm">{subheading}</h4>
+          <div className="my-6 flex items-center justify-center gap-6">
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds LinkedIn"
+              href=""
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                className="h-6"
+              >
+                <path
+                  fill="currentColor"
+                  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds Facebook"
+              href=""
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                className="h-6"
+              >
+                <path
+                  fill="currentColor"
+                  d="m279.14 288 14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds Instagram"
+              href=""
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                className="h-6"
+              >
+                <path
+                  fill="currentColor"
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              className="text-gray-700 hover:text-orange-600"
+              aria-label="Visit TrendyMinds Twitter"
+              href=""
+              target="_blank"
+            >
+              <svg
+                className="h-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <h4 className="tcp text-center">Visi</h4>
+          <p>{visi}</p>
+          <h4 className="tcp text-center">Misi</h4>
+          <ul className="max-w-md list-inside list-disc space-y-1 ">
+            <li>At least 10 characters (and up to 100 characters)</li>
+            <li>At least one lowercase character</li>
+            <li>Inclusion of at least one special </li>
+          </ul>
+
+          <button
+            onClick={() => handleShowModal()}
+            className="  border-p tcp mx-auto  my-4 w-1/2 rounded-md border-2 px-4 py-2 hover:bg-orange-500 hover:text-white"
+          >
+            Read more
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const ImageCard: React.FC = () => {
+  return (
+    <div className="card-container">
+      <div className="card">
+        <div className="img-content">
+          <Image
+            src={bgimage}
+            alt="card image"
+            width={100}
+            height={100}
+            className="h-full w-full"
+          />
+        </div>
+        <div className="content">
+          <p className="heading">Card Hover</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipii voluptas ten mollitia
+            pariatur odit, ab minus ratione adipisci accusamus vel est excepturi
+            laboriosam magnam necessitatibus dignissimos molestias.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
