@@ -25,7 +25,7 @@ function Modal(props: IProps) {
             className="fixed inset-0 bg-black opacity-50"
             onClick={props.handleHideModal}
           ></div>
-          ``
+
           {/* Modal */}
           <motion.div
             className="relative z-50 flex w-11/12 flex-col rounded-lg border-0 bg-white shadow-lg sm:w-96"
