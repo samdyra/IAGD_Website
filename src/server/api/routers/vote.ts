@@ -55,12 +55,13 @@ export const voteRouter = createTRPCRouter({
       z.object({
         voterToken: z.string(),
         voteNumber: z.number().int(),
+        phoneNumber: z.string(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       // Attempt to find a voter with the given voterToken
       const voter = await ctx.prisma.voter.findUnique({
-        where: { voterToken: input.voterToken },
+        where: { phoneNumber: input.phoneNumber },
       });
 
       if (!voter) {
