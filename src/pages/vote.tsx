@@ -97,11 +97,6 @@ export default function Vote() {
               {currentPage(step)}
             </motion.div>
           </AnimatePresence>
-          {/* <FormInputVoting
-            handleSelectNum={handleSelectNum}
-            selectNum={selectNum}
-            handleToggleModal={handleToggleModal}
-          /> */}
         </main>
       </div>
     </>
@@ -114,12 +109,22 @@ type WelcomingProps = {
 
 const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
   <>
-    <div className="container flex flex-col items-center justify-center gap-12 px-4 py-5">
-      <h1 className="max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
+    <div className="container flex flex-col items-center justify-center px-4 py-5">
+      <h1 className="mb-8 max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:mb-2 sm:text-[5rem]">
         Welcome Kamerads, to
         <span className="text-[#FF5C00]"> IAGD</span> Election
       </h1>
-
+      <div
+        className="mx-auto  mb-12 flex  w-fit shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
+        onClick={() => handleSetStep("verify")}
+      >
+        <div className="rounded-l-xl border-2 border-black px-7 py-2">
+          <h1 className="">Ready to vote?</h1>
+        </div>
+        <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2">
+          <h1 className="">Click here!</h1>
+        </div>
+      </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
         <Link
           className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:bg-[#a3b3e43f]"
@@ -131,12 +136,13 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
           </h3>
           <div className="text-lg">
             Do you want to vote, but dont have voter token yet? Click here to
-            contact Felia!
+            contact XXX!
           </div>
         </Link>
+
         <Link
           className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#FF5C00] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl  hover:bg-[#a3b3e43f]"
-          href="/"
+          href="https://wa.me/08122456787"
           target="_blank"
         >
           <h3 className="text-xl font-bold">Study the candidates →</h3>
@@ -145,17 +151,6 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
             candidate.
           </div>
         </Link>
-      </div>
-    </div>
-    <div
-      className="mx-auto mt-8  flex w-fit  shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
-      onClick={() => handleSetStep("verify")}
-    >
-      <div className="rounded-l-xl border-2 border-black px-7 py-2">
-        <h1 className="">Ready to vote?</h1>
-      </div>
-      <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2">
-        <h1 className="">Click here!</h1>
       </div>
     </div>
   </>

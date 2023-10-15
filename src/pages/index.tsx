@@ -164,9 +164,12 @@ export default function Home() {
               pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo
               eleifend ultricies purus iaculis.
             </p>
-            <button className="   bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white">
-              Vote Sekarang
-            </button>
+
+            <Link href="/vote">
+              <button className="   bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white">
+                Vote Sekarang
+              </button>
+            </Link>
           </div>
         </div>
       </div>
