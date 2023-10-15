@@ -66,7 +66,7 @@
   width: 50px;
   height: 50px;
   fill: #e8e8e8;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .card .content {
@@ -88,7 +88,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(50px);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .card .content .heading {
@@ -109,4 +109,18 @@
 
 .card:hover .img-content svg {
   fill: transparent;
+}
+
+.bgnew {
+  background-color: rgb(100, 116, 139);
+  background-image: radial-gradient(
+      at 10% 66%,
+      rgb(125, 211, 252) 0,
+      transparent 87%
+    ),
+    radial-gradient(at 41% 16%, rgb(253, 164, 175) 0, transparent 87%),
+    radial-gradient(at 18% 96%, rgb(34, 197, 94) 0, transparent 26%),
+    radial-gradient(at 32% 22%, rgb(224, 242, 254) 0, transparent 88%),
+    radial-gradient(at 47% 2%, rgb(185, 28, 28) 0, transparent 18%),
+    radial-gradient(at 46% 46%, rgb(54, 83, 20) 0, transparent 70%);
 }

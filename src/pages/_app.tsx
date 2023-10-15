@@ -15,7 +15,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <Head>
           <title>Template</title>
           <meta name="description" content="Fruits" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="../../public/logomini.png" />
         </Head>
         <Toaster position="top-center" />
         <Component {...pageProps} />
