@@ -17,50 +17,49 @@ export default function Home() {
         <link rel="icon" href="logomini.png" />
       </Head>
       <Navbar />
-      <div className="h-max w-full">
-        <div className="bgnew h-[720px] rounded-b-[50px]">
-          <MiscIAGDIcon />
-          <div className="mt-[70px] sm:mt-[100px] ">
-            <Link href="/vote">
-              <div className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
-                <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
-                  <h1 className="font-semibold ">Ready to vote?</h1>
-                </div>
-                <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
-                  <h1 className="font-semibold ">Click here!</h1>
-                </div>
-              </div>
-            </Link>
-            <h1 className=" mx-auto mb-2 max-w-[1120px]  px-4 text-center text-4xl font-extrabold leading-tight drop-shadow-md md:text-[3rem] lg:text-[4rem]">
-              Pemilu <span className="gt">Ikatan Alumni Geodesi </span>
-              (IAGD) 2023
-            </h1>
-            <h2 className="text-center text-xl font-semibold text-gray-700 sm:text-2xl">
-              Institut Teknologi Bandung
-            </h2>
-          </div>
-          <div
-            className="absolute bottom-10 left-0 right-0 m-auto cursor-pointer"
-            onClick={() =>
-              window.scroll({
-                top: window.scrollY + 920,
-                behavior: "smooth",
-              })
-            }
-          >
-            <div id="scroll-down-animation">
-              <span className="mouse">
-                <span className="move"></span>
-              </span>
-            </div>
-            <h2 className="mt-3 text-center font-semibold text-gray-700">
-              Scroll down
-            </h2>
-          </div>
 
-          <div className="absolute  bottom-0 right-0 rotate-180">
-            <MiscIAGDIcon />
+      <div className="bgnew relative h-[720px] rounded-b-[50px]">
+        <MiscIAGDIcon />
+        <div className="mt-[100px] sm:mt-[100px] ">
+          <Link href="/vote">
+            <div className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
+              <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
+                <h1 className="font-semibold ">Ready to vote?</h1>
+              </div>
+              <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
+                <h1 className="font-semibold ">Click here!</h1>
+              </div>
+            </div>
+          </Link>
+          <h1 className=" mx-auto mb-2 max-w-[1120px]  px-4 text-center text-4xl font-extrabold leading-tight drop-shadow-md md:text-[3rem] lg:text-[4rem]">
+            Pemilu <span className="gt">Ikatan Alumni Geodesi </span>
+            (IAGD) 2023
+          </h1>
+          <h2 className="text-center text-xl font-semibold text-gray-700 sm:text-2xl">
+            Institut Teknologi Bandung
+          </h2>
+        </div>
+        <div
+          className="absolute bottom-10 left-0 right-0 m-auto cursor-pointer"
+          onClick={() =>
+            window.scroll({
+              top: window.scrollY + 920,
+              behavior: "smooth",
+            })
+          }
+        >
+          <div id="scroll-down-animation">
+            <span className="mouse">
+              <span className="move"></span>
+            </span>
           </div>
+          <h2 className="mt-3 text-center font-semibold text-gray-700">
+            Scroll down
+          </h2>
+        </div>
+
+        <div className="absolute  bottom-0 right-0 rotate-180">
+          <MiscIAGDIcon />
         </div>
       </div>
 
