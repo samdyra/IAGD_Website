@@ -1,0 +1,102 @@
+.headerWrapper {
+  height: calc(100vh - 58px);
+  max-width: 1280px;
+  margin: 0 auto 100px auto;
+  display: flex;
+}
+
+.headerContainer {
+  margin-left: 2%;
+  margin-top: calc(0.26 * (100vh - 58px));
+}
+
+.headerDesc {
+  width: 520px;
+  /* margin-left: 5%; */
+  font-family: poppins;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 137.5%;
+  text-align: justify;
+  color: #000000;
+  /* margin-top: 5px; */
+}
+
+.parallaxWrapper {
+  width: 575px;
+  height: 575px;
+  margin-left: 75px;
+  margin-top: calc(0.068 * (100vh - 58px));
+}
+
+.parallaxWrapper .laxImageOne {
+  border-radius: 50%;
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  margin-left: 112.5px;
+  margin-top: 112.5px;
+  z-index: 5;
+  object-fit: cover;
+}
+
+.parallaxWrapper .laxImageTwo {
+  object-fit: cover;
+
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  margin-left: 300px;
+  margin-top: 320px;
+  z-index: 4;
+}
+
+.parallaxWrapper .laxImageThree {
+  object-fit: cover;
+
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  /* margin-left: 15px; */
+  margin-top: 340px;
+  z-index: 4;
+}
+
+.parallaxWrapper .laxImageFour {
+  object-fit: cover;
+
+  border-radius: 50%;
+  width: 310px;
+  height: 310px;
+  position: absolute;
+  margin-left: 270px;
+  margin-top: -20px;
+  z-index: 2;
+}
+
+.parallaxWrapper .laxImageFive {
+  object-fit: cover;
+
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  margin-left: 120px;
+  margin-top: -30px;
+  z-index: 3;
+}
+
+.parallaxWrapper .laxImageSix {
+  border-radius: 50%;
+  width: 210px;
+  height: 210px;
+  position: absolute;
+  margin-left: -50px;
+  margin-top: 15px;
+  z-index: 4;
+
+  object-fit: cover;
+}

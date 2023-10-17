@@ -3,27 +3,27 @@
 @tailwind utilities;
 
 .gt {
-  @apply inline-block bg-gradient-to-r from-blue-600 via-indigo-600 to-red-600 bg-clip-text text-transparent;
+  @apply inline-block bg-gradient-to-r from-[#EA7227] via-indigo-600 to-[#2e3486] bg-clip-text text-transparent;
 }
 
 .bgp {
-  @apply bg-[#FF5C00];
+  @apply bg-[#EA7227];
 }
 
 .border-p {
-  @apply border-[#FF5C00];
+  @apply border-[#EA7227];
 }
 
 .tcp {
-  @apply text-[#FF5C00];
+  @apply text-[#EA7227];
 }
 
 .tcs {
-  @apply text-[#18229B];
+  @apply text-[#2e3486];
 }
 
 .bgs {
-  @apply bg-[#18229B];
+  @apply bg-[#2e3486];
 }
 
 ::-webkit-scrollbar {
@@ -112,15 +112,42 @@
 }
 
 .bgnew {
-  background-color: rgb(100, 116, 139);
-  background-image: radial-gradient(
-      at 10% 66%,
-      rgb(125, 211, 252) 0,
-      transparent 87%
-    ),
-    radial-gradient(at 41% 16%, rgb(253, 164, 175) 0, transparent 87%),
-    radial-gradient(at 18% 96%, rgb(34, 197, 94) 0, transparent 26%),
-    radial-gradient(at 32% 22%, rgb(224, 242, 254) 0, transparent 88%),
-    radial-gradient(at 47% 2%, rgb(185, 28, 28) 0, transparent 18%),
-    radial-gradient(at 46% 46%, rgb(54, 83, 20) 0, transparent 70%);
+  background-color: rgb(255, 255, 255);
+  background-image: radial-gradient(at 5% 73%, #5e67de48 0, transparent 20%),
+    radial-gradient(at 95% 24%, #d99d779c 0, transparent 21%);
+}
+
+.mouse {
+  margin: 0 auto;
+  display: block;
+  border-radius: 50px;
+  border: 3px solid #ea7227;
+  height: 65px;
+  width: 35px;
+}
+
+.move {
+  position: absolute;
+  background-color: #000;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: move 2s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(-50%, 0px);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, 20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 50px);
+    opacity: 0;
+  }
 }

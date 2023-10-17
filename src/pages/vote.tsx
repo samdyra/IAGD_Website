@@ -110,39 +110,24 @@ type WelcomingProps = {
 const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
   <>
     <div className="container flex flex-col items-center justify-center px-4 py-5">
-      <h1 className="mb-8 max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:mb-2 sm:text-[5rem]">
+      <h1 className="mb-8 max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
         Welcome Kamerads, to
-        <span className="text-[#FF5C00]"> IAGD</span> Election
+        <span className="text-[#EA7227]"> IAGD</span> Election
       </h1>
-      <div
-        className="mx-auto  mb-12 flex  w-fit shadow-md hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
-        onClick={() => handleSetStep("verify")}
-      >
-        <div className="rounded-l-xl border-2 border-black px-7 py-2">
-          <h1 className="">Ready to vote?</h1>
-        </div>
-        <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-7 py-2">
-          <h1 className="">Click here!</h1>
-        </div>
-      </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-        <Link
+        <div
           className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:bg-[#a3b3e43f]"
-          href="/"
-          target="_blank"
+          onClick={() => handleSetStep("verify")}
         >
-          <h3 className="text-xl font-bold">
-            Haven&apos;t receive token yet? →
-          </h3>
+          <h3 className="text-xl font-bold">Continue To Vote →</h3>
           <div className="text-lg">
             Do you want to vote, but dont have voter token yet? Click here to
             contact XXX!
           </div>
-        </Link>
-
+        </div>
         <Link
-          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#FF5C00] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl  hover:bg-[#a3b3e43f]"
-          href="https://wa.me/08122456787"
+          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#EA7227] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl  hover:bg-[#a3b3e43f]"
+          href="/"
           target="_blank"
         >
           <h3 className="text-xl font-bold">Study the candidates →</h3>
@@ -207,8 +192,8 @@ const FormInputValidation = ({
     <form className="w-screen ">
       <div className="mx-auto max-w-[520px] px-6  sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
         <label className="mb-6 block text-2xl font-bold text-gray-900  md:mb-8 md:text-2xl lg:text-4xl">
-          Please enter your <span className="text-[#FF5C00]">phone number</span>{" "}
-          and <span className="text-[#FF5C00]">voter token</span>
+          Please enter your <span className="text-[#EA7227]">phone number</span>{" "}
+          and <span className="text-[#EA7227]">voter token</span>
         </label>
         <label className="text-md my-2 block font-semibold text-gray-900  md:text-lg ">
           Phone Number
@@ -251,7 +236,7 @@ const FormInputValidation = ({
           ${
             !isChecked || isLoadingVerify || isFormInvalid
               ? "bg-slate-400"
-              : "bg-[#FF5C00]"
+              : "bg-[#EA7227]"
           }`}
           onClick={handleClickVerify}
           disabled={!isChecked || isLoadingVerify || isFormInvalid}
@@ -293,9 +278,9 @@ const FormInputVoting = ({
     <>
       <div className="mb-36 mt-16 md:mt-8 lg:mt-16">
         <h1 className="mb-4 px-4 text-center text-3xl font-bold text-gray-800 md:text-4xl">
-          Vote <span className="text-[#FF5C00]">Kandidat</span> Pilihanmu!
+          Vote <span className="text-[#EA7227]">Kandidat</span> Pilihanmu!
         </h1>
-        <div className="mx-auto mb-4 w-56 cursor-pointer rounded-lg border-2 border-[#FF5C00] bg-[#d2daf43f] p-2 shadow-2xl hover:bg-[#a3b3e43f]">
+        <div className="mx-auto mb-4 w-56 cursor-pointer rounded-lg border-2 border-[#EA7227] bg-[#d2daf43f] p-2 shadow-2xl hover:bg-[#a3b3e43f]">
           <Link href={"/"}>
             <h1 className="text-center  text-sm font-semibold text-gray-800">
               Belum yakin? Klik disini untuk mempelajari para kandidat
@@ -308,7 +293,7 @@ const FormInputVoting = ({
 
             return (
               <div
-                className="mx-auto mb-6 aspect-[3/4] h-[420px] cursor-pointer rounded-3xl border-2 border-black bg-[#FF5C00] p-5 text-gray-800 hover:opacity-80 md:h-[450px]"
+                className="mx-auto mb-6 aspect-[3/4] h-[420px] cursor-pointer rounded-3xl border-2 border-black bg-[#EA7227] p-5 text-gray-800 hover:opacity-80 md:h-[450px]"
                 key={idx}
                 onClick={() => handleSelectNum(candidate.num)}
               >
@@ -342,7 +327,7 @@ const FormInputVoting = ({
       </div>
       <div className="fixed bottom-0 left-0 right-0 z-40 h-16 w-full  bg-white/30 shadow-md backdrop-blur-md" />
       <div
-        className="fixed inset-x-0 bottom-8 z-40 mx-auto h-16 w-60 cursor-pointer rounded-lg bg-[#18229B] hover:opacity-80"
+        className="fixed inset-x-0 bottom-8 z-40 mx-auto h-16 w-60 cursor-pointer rounded-lg bg-[#2e3486] hover:opacity-80"
         onClick={
           selectNum !== 0
             ? handleToggleModal
@@ -379,7 +364,7 @@ function Modal({
           <div className="fixed z-50 h-screen w-screen  bg-white/30 backdrop-blur-md " />
           <div
             aria-hidden="true"
-            className="fixed inset-x-0 top-[25%] z-50 mx-auto w-[320px] rounded-lg border-4 border-[#FF5C00] md:w-[450px]"
+            className="fixed inset-x-0 top-[25%] z-50 mx-auto w-[320px] rounded-lg border-4 border-[#EA7227] md:w-[450px]"
           >
             <div className="relative rounded-lg bg-slate-200 shadow ">
               <div className="flex items-start justify-between rounded-t border-b px-6 pt-6">
@@ -424,7 +409,7 @@ function Modal({
                   onClick={callback}
                   data-modal-hide="defaultModal"
                   type="button"
-                  className="rounded-lg bg-[#FF5C00] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 "
+                  className="rounded-lg bg-[#EA7227] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 "
                 >
                   Konfirmasi
                 </button>

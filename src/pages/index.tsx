@@ -2,11 +2,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import logo from "../../public/logo.png";
-import bgimage from "../../public/bgimage.jpeg";
 import phone from "../../public/Phone.png";
 import Link from "next/link";
 import { type StaticImageData } from "next/image";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+// import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
 export default function Home() {
@@ -19,38 +18,47 @@ export default function Home() {
       </Head>
       <Navbar />
       <div className="h-max w-full">
-        <div className="h-[667px] rounded-b-[50px] bg-[#D3D4C5] bg-[url('../../public/bgimage.jpeg')] bg-cover bg-[center_top_0] bg-blend-soft-light">
-          <div>
-            <MiscIAGDIcon />
-          </div>
-          <div className="mt-[100px] sm:mt-[125px] ">
-            <h2 className="tcs sm: mb-2 text-center text-lg font-bold  sm:text-2xl">
-              SELAMAT DATANG DI
-            </h2>
-            <h1 className="tcp mb-2 px-4 text-center text-3xl font-bold sm:text-4xl ">
-              Pemilu Ikatan Alumni Geodesi <br></br> (IAGD) 2023
+        <div className="bgnew h-[720px] rounded-b-[50px]">
+          <MiscIAGDIcon />
+          <div className="mt-[70px] sm:mt-[100px] ">
+            <Link href="/vote">
+              <div className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
+                <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
+                  <h1 className="font-semibold ">Ready to vote?</h1>
+                </div>
+                <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
+                  <h1 className="font-semibold ">Click here!</h1>
+                </div>
+              </div>
+            </Link>
+            <h1 className=" mx-auto mb-2 max-w-[1120px]  px-4 text-center text-4xl font-extrabold leading-tight drop-shadow-md md:text-[3rem] lg:text-[4rem]">
+              Pemilu <span className="gt">Ikatan Alumni Geodesi </span>
+              (IAGD) 2023
             </h1>
-            <h2 className="tcp text-center font-semibold sm:text-2xl ">
+            <h2 className="text-center text-xl font-semibold text-gray-700 sm:text-2xl">
               Institut Teknologi Bandung
             </h2>
           </div>
-          <div className="mx-auto mt-16 w-fit ">
-            <Link href="/vote">
-              <button
-                type="button"
-                className="bgp mr-4 rounded-lg p-3 font-semibold text-white"
-              >
-                Vote Sekarang
-              </button>
-            </Link>
-            <button
-              type="button"
-              className="rounded-lg border border-orange-600 p-3 font-semibold text-[#FF5C00]"
-            >
-              Lihat Kebawah
-            </button>
+          <div
+            className="absolute bottom-10 left-0 right-0 m-auto cursor-pointer"
+            onClick={() =>
+              window.scroll({
+                top: window.scrollY + 920,
+                behavior: "smooth",
+              })
+            }
+          >
+            <div id="scroll-down-animation">
+              <span className="mouse">
+                <span className="move"></span>
+              </span>
+            </div>
+            <h2 className="mt-3 text-center font-semibold text-gray-700">
+              Scroll down
+            </h2>
           </div>
-          <div className="mt-[128px] flex rotate-180 justify-start sm:mt-[118px]">
+
+          <div className="absolute  bottom-0 right-0 rotate-180">
             <MiscIAGDIcon />
           </div>
         </div>
@@ -68,7 +76,7 @@ export default function Home() {
           subheading={cardData.subheading}
         />
       </div>
-      <h2 className="tcs mx-auto max-w-[620px] pt-6 text-center text-2xl font-semibold sm:text-3xl">
+      <h2 className="tcs mx-auto max-w-[620px] px-4 pt-6 text-center text-2xl font-semibold sm:text-3xl">
         Daftar Calon Kandidat Ketua Umum IAGD 2020-2023
       </h2>
       <div className="mx-auto mt-16 w-fit xl:mt-10 xl:flex xl:gap-7">
@@ -91,7 +99,7 @@ export default function Home() {
           subheading="Kandidat Nomor 3"
         />
       </div>
-      <div className="mt-20  sm:mb-32">
+      {/* <div className="mt-20  sm:mb-32">
         <h2 className="tcs mx-auto max-w-[620px] pt-6 text-center text-2xl font-semibold sm:text-3xl">
           Galeri Foto Pemilu IAGD
         </h2>
@@ -141,8 +149,8 @@ export default function Home() {
             </SplideSlide>
           </Splide>
         </div>
-      </div>
-      <div className="container mx-auto   flex flex-col-reverse  gap-4 sm:flex-row sm:justify-between">
+      </div> */}
+      <div className="container mx-auto   mt-32 flex  flex-col-reverse gap-4 sm:flex-row sm:justify-between">
         <div className="flex w-full items-center justify-center sm:w-2/5 ">
           <Image
             src={phone}
@@ -195,23 +203,6 @@ export default function Home() {
             <div className="my-6 flex items-center justify-center gap-6">
               <a
                 className="text-white hover:text-blue-600"
-                aria-label="Visit TrendyMinds LinkedIn"
-                href=""
-                target="_blank"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  className="h-6"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                className="text-white hover:text-blue-600"
                 aria-label="Visit TrendyMinds Facebook"
                 href=""
                 target="_blank"
@@ -244,23 +235,6 @@ export default function Home() {
                   ></path>
                 </svg>
               </a>
-              <a
-                className="text-white hover:text-blue-600"
-                aria-label="Visit TrendyMinds Twitter"
-                href=""
-                target="_blank"
-              >
-                <svg
-                  className="h-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
-                  ></path>
-                </svg>
-              </a>
             </div>
           </div>
         </div>
@@ -273,13 +247,22 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between border-2 p-[16px] sm:px-16">
       <Image src={logo} width={113} alt="logo-iagd"></Image>
-      <Link href="/vote">
-        <div className="bgp flex rounded-lg border p-3 align-middle">
-          <button className="font-semibold text-white" type="button">
-            Vote Sekarang
-          </button>
-        </div>
-      </Link>
+      <div className="flex gap-4">
+        <Link href="/vote" className="hidden sm:block">
+          <div className="bgp flex rounded-lg border p-3 align-middle">
+            <button className="font-semibold text-white" type="button">
+              Vote Sekarang
+            </button>
+          </div>
+        </Link>
+        <Link href="/vote">
+          <div className="bgs flex rounded-lg border p-3 align-middle">
+            <button className="font-semibold text-white" type="button">
+              Daftar Sebagai Pemilih
+            </button>
+          </div>
+        </Link>
+      </div>
     </nav>
   );
 };
@@ -295,11 +278,11 @@ const MiscIAGDIcon = () => {
     >
       <path
         d="M76.1134 -7.74027e-06C76.0985 4.74048 77.0175 9.43748 78.8179 13.8228C80.6182 18.2082 83.2647 22.1959 86.6062 25.5585C89.9477 28.9211 93.9188 31.5925 98.2928 33.4204C102.667 35.2483 107.358 36.1967 112.098 36.2116L112.212 0.113342L76.1134 -7.74027e-06Z"
-        fill="#FF5C00"
+        fill="#EA7227"
       />
       <path
         d="M74.0982 -7.74027e-06C74.1131 4.74048 73.1942 9.43748 71.3938 13.8228C69.5935 18.2082 66.947 22.1959 63.6055 25.5585C60.264 28.9211 56.2929 31.5925 51.9189 33.4204C47.545 35.2483 42.8538 36.1967 38.1134 36.2116L38 0.113342L74.0982 -7.74027e-06Z"
-        fill="#18229B"
+        fill="#2e3486"
       />
       <path
         d="M0.113427 36.2116C0.0985418 31.4711 1.01751 26.7741 2.81786 22.3888C4.61822 18.0035 7.2647 14.0157 10.6062 10.6531C13.9477 7.29055 17.9188 4.61907 22.2927 2.79121C26.6667 0.963355 31.3578 0.014909 36.0983 2.38461e-05L36.2117 36.0983L0.113427 36.2116Z"
@@ -307,7 +290,7 @@ const MiscIAGDIcon = () => {
       />
       <path
         d="M36.0982 38C36.1131 42.7405 35.1942 47.4375 33.3938 51.8228C31.5935 56.2082 28.947 60.1959 25.6055 63.5585C22.264 66.9211 18.2929 69.5925 13.9189 71.4204C9.54498 73.2483 4.85384 74.1967 0.11335 74.2116L7.62936e-06 38.1133L36.0982 38Z"
-        fill="#FF5C00"
+        fill="#EA7227"
       />
     </svg>
   );
@@ -344,9 +327,9 @@ const MilestoneElement: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto  pb-12 pt-4 sm:pb-24">
+    <div className="container mx-auto  pb-12 pt-36 sm:pb-24">
       <div className="mb-4 p-8  text-center text-gray-800 sm:mt-12">
-        <h2 className="mb-4 text-2xl font-bold text-[#18229B] sm:text-3xl lg:mb-8">
+        <h2 className="mb-4 text-2xl font-bold text-[#2e3486] sm:text-3xl lg:mb-8">
           Alur Pemilu
         </h2>
         <p className="text-lg md:text-2xl">
@@ -392,7 +375,7 @@ const cardData = {
 
 const cardData2 = {
   body: "Malesuada facilisi libero, nam eu. Quis pellentesque tortor a elementum ut blandit sed pellentesque arcu. Malesuada in faucibus risus velit diam. Non, massa ut a arcu, fermentum, vel interdum.",
-  badge: bgimage, // Assuming the logo.png is in the public directory
+  badge: logo, // Assuming the logo.png is in the public directory
   heading: "Lionel Messi",
   subheading: "Ketua IAGD Periode 2020-2023",
 };
@@ -472,7 +455,7 @@ const ImageCard: React.FC = () => {
       <div className="card">
         <div className="img-content">
           <Image
-            src={bgimage}
+            src={logo}
             alt="card image"
             width={100}
             height={100}
