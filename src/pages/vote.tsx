@@ -111,18 +111,18 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
   <>
     <div className="container flex flex-col items-center justify-center px-4 py-5">
       <h1 className="mb-8 max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
-        Welcome Kamerads, to
-        <span className="text-[#EA7227]"> IAGD</span> Election
+        Selamat Datang Kamerads, ke
+        <span className="text-[#EA7227]"> Pemilu IAGD</span>
       </h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
         <div
           className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:bg-[#a3b3e43f]"
           onClick={() => handleSetStep("verify")}
         >
-          <h3 className="text-xl font-bold">Continue To Vote →</h3>
+          <h3 className="text-xl font-bold">Lanjutkan Untuk Voting →</h3>
           <div className="text-lg">
-            Do you want to vote, but dont have voter token yet? Click here to
-            contact XXX!
+            Pastikan anda telah menerima nomor telepon dan token voter untuk
+            melanjutkan
           </div>
         </div>
         <Link
@@ -130,10 +130,10 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
           href="/"
           target="_blank"
         >
-          <h3 className="text-xl font-bold">Study the candidates →</h3>
+          <h3 className="text-xl font-bold">Pelajari semua kandidat →</h3>
           <div className="text-lg">
-            Learn more about all the candidates to make sure you chose the best
-            candidate.
+            Pelajari masing-masing kandidat, agar kalian semakin yakin memilih
+            kandidat yang anda inginkan!
           </div>
         </Link>
       </div>
@@ -192,11 +192,11 @@ const FormInputValidation = ({
     <form className="w-screen ">
       <div className="mx-auto max-w-[520px] px-6  sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
         <label className="mb-6 block text-2xl font-bold text-gray-900  md:mb-8 md:text-2xl lg:text-4xl">
-          Please enter your <span className="text-[#EA7227]">phone number</span>{" "}
-          and <span className="text-[#EA7227]">voter token</span>
+          Masukan <span className="text-[#EA7227]">nomor telepon</span> dan{" "}
+          <span className="text-[#EA7227]">voter token</span> anda!
         </label>
         <label className="text-md my-2 block font-semibold text-gray-900  md:text-lg ">
-          Phone Number
+          Nomor Telepon
         </label>
         <PhoneInput
           value={phoneNumber}
@@ -226,8 +226,8 @@ const FormInputValidation = ({
             />
           </div>
           <p className="text-sm font-bold text-gray-900  md:text-lg">
-            By checking this box, I sincerely declare that I am the rightful
-            owner of this phone number and token.
+            Dengan mencentang kotak ini, saya menyatakan bahwa saya adalah
+            pemilik sah dari nomor telepon dan token ini.
           </p>
         </div>
         <button
@@ -241,7 +241,7 @@ const FormInputValidation = ({
           onClick={handleClickVerify}
           disabled={!isChecked || isLoadingVerify || isFormInvalid}
         >
-          {isLoadingVerify ? "Loading..." : "Verify Token"}
+          {isLoadingVerify ? "Loading..." : "Verifikasi Token"}
         </button>
       </div>
     </form>

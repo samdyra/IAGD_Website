@@ -76,28 +76,34 @@ export default function Home() {
         />
       </div>
       <h2 className="tcs mx-auto max-w-[620px] px-4 pt-6 text-center text-2xl font-semibold sm:text-3xl">
-        Daftar Calon Kandidat Ketua Umum IAGD 2020-2023
+        Daftar Calon Kandidat Ketua Umum IAGD 2020-2023 (TBA)
       </h2>
-      <div className="mx-auto mt-16 w-fit xl:mt-10 xl:flex xl:gap-7">
-        <ProfileCard
-          visi={cardData2.body}
-          badge={cardData2.badge}
-          heading="Lionel Messi"
-          subheading="Kandidat Nomor 1"
-        />
-        <ProfileCard
-          visi={cardData2.body}
-          badge={cardData2.badge}
-          heading="Cristiano Ronaldo"
-          subheading="Kandidat Nomor 2"
-        />
-        <ProfileCard
-          visi={cardData2.body}
-          badge={cardData2.badge}
-          heading="Neymar Junior"
-          subheading="Kandidat Nomor 3"
-        />
+
+      <div className="relative ">
+        <div className="absolute h-full w-full  bg-white/30 backdrop-blur-sm">
+          <div className="bgp inset-x-0 mx-auto mt-80 h-60 w-[375px] items-center rounded-lg border-2  bg-white text-center shadow-md xl:mt-32">
+            <h1 className="mt-[72px] px-10 text-xl font-semibold text-white">
+              Calon Kandidat Ketua umum IAGD akan diumumkan pada 4 November
+            </h1>
+          </div>
+        </div>
+
+        <div className="mx-auto my-16 max-w-[1024px] xl:mt-10 xl:flex xl:gap-7">
+          <ProfileCard
+            visi={cardData2.body}
+            badge={cardData2.badge}
+            heading="Nama Kandidat 1"
+            subheading="Kandidat Nomor 1"
+          />
+          <ProfileCard
+            visi={cardData2.body}
+            badge={cardData2.badge}
+            heading="Nama Kandidat 2"
+            subheading="Kandidat Nomor 2"
+          />
+        </div>
       </div>
+
       {/* <div className="mt-20  sm:mb-32">
         <h2 className="tcs mx-auto max-w-[620px] pt-6 text-center text-2xl font-semibold sm:text-3xl">
           Galeri Foto Pemilu IAGD
@@ -159,22 +165,26 @@ export default function Home() {
             className="h-full w-auto sm:mx-auto"
           />
         </div>
-        <div className=" w-full sm:w-3/5">
-          <div className="tcs mb-4  p-8 pt-24  text-center sm:text-left ">
+        <div className="w-full sm:w-3/5">
+          <div className="tcs mb-4    p-8 pt-24 text-center  sm:text-left">
             <h2 className=" mb-8 text-4xl font-bold sm:text-6xl ">
               AYO MEMILIH!
             </h2>
             <p className="text-base sm:text-lg ">
-              Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum
-              sit nunc in eros scelerisque sed. Commodo in viverra nunc,
-              ullamcorper ut. Non, amet, aliquet scelerisque nullam sagittis,
-              pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo
-              eleifend ultricies purus iaculis.
+              Mari berpartisipasi dalam pemilu IAGD! Pastikan Anda mendaftar
+              sebagai pemilih dan berikan suara Anda untuk masa depan yang lebih
+              baik. Suara Anda adalah kekuatan untuk perubahan positif kepada
+              IAGD
             </p>
 
             <Link href="/vote">
-              <button className="   bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white">
+              <button className="bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white sm:mr-4">
                 Vote Sekarang
+              </button>
+            </Link>
+            <Link href="/vote">
+              <button className="bgs mx-auto mt-4 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white">
+                Daftar Sebagai Pemilih
               </button>
             </Link>
           </div>
@@ -303,40 +313,42 @@ const MilestoneElement: React.FC = () => {
 
   const electionTimeline: ElectionEvent[] = [
     {
-      date: "14 Agustus - 26 Agustus 2023",
-      description: "Pensuasanaan Pemilu IAGD 2023",
+      date: "20 Oktober - 3 November",
+      description: "Pendaftaran calon ketua IAGD",
     },
     {
-      date: "27 Agustus - 10 September 2023",
-      description: "Periode Pendaftaran Bakal Calon Pendaftaran Pemilih",
+      date: "25 Oktober - 8 November 2023",
+      description: "Periode pendaftaran pemilih",
     },
     {
-      date: "11 September - 17 September 2023",
-      description: "Verifikasi, Penetapan Calon Verifikasi, & Pengumuman DPT",
+      date: "4 November - 18 November 2023",
+      description: "Kampanye dari masing-masing kandidat calon",
     },
     {
-      date: "18 September - 1 Oktober 2023",
-      description: "Kampanye & Hearing",
+      date: "11 November",
+      description: "Rilis daftar pemilih tetap",
     },
-    { date: "2 Oktober - 7 Oktober 2023", description: "Masa Tenang" },
+    { date: "25 November", description: "Pemungutan suara" },
     {
-      date: "8 Oktober 2023",
-      description: "Pemungutan Suara Verifikasi & Pengumuman Ketua",
+      date: "26 November",
+      description: "Pengumuman Ketua Terpilih",
     },
   ];
 
   return (
-    <div className="container mx-auto  pb-12 pt-36 sm:pb-24">
+    <div className="container mx-auto  pb-12 pt-24 sm:pb-24">
       <div className="mb-4 p-8  text-center text-gray-800 sm:mt-12">
         <h2 className="mb-4 text-2xl font-bold text-[#2e3486] sm:text-3xl lg:mb-8">
           Alur Pemilu
         </h2>
         <p className="text-lg md:text-2xl">
-          Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum sit
-          nunc in eros scelerisque sed. Commodo in viverra nunc, ullamcorper ut.
-          Non, amet, aliquet scelerisque nullam sagittis, pulvinar. Fermentum
-          scelerisque sit consectetur hac mi. Mollis leo eleifend ultricies
-          purus iaculis.
+          Pemilu IAGD mengikuti jadwal yang terstruktur, dimulai dari
+          pendaftaran calon Ketua dan pemilih pada 20 Oktober hingga 8 November,
+          dilanjutkan dengan, kampanye selama dua minggu, dan pengumuman hasil
+          pemilu pada 26 November. Proses ini melibatkan pemilih dalam pemilihan
+          ketua dengan transparansi dan keadilan, dengan masa tenang pada 18-24
+          November untuk pemilih merenungkan pilihan mereka sebelum pemungutan
+          suara pada 25 November.
         </p>
       </div>
 
@@ -415,7 +427,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   subheading,
 }) => {
   return (
-    <div className="aspect mb-12 aspect-[3/5] h-[540px] rounded-lg bg-white shadow-lg sm:h-[640px] ">
+    <div className="aspect mx-auto mb-8 aspect-[3/5] h-[540px] rounded-lg bg-white shadow-lg sm:h-[640px]">
       <img
         src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
         alt="Profile Badge"
@@ -464,9 +476,10 @@ const ImageCard: React.FC = () => {
         <div className="content">
           <p className="heading">Card Hover</p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipii voluptas ten mollitia
-            pariatur odit, ab minus ratione adipisci accusamus vel est excepturi
-            laboriosam magnam necessitatibus dignissimos molestias.
+            Mari berpartisipasi dalam pemilu IAGD! Pastikan Anda mendaftar
+            sebagai pemilih dan berikan suara Anda untuk masa depan yang lebih
+            baik. Suara Anda adalah kekuatan untuk perubahan positif kepada
+            IAGD.
           </p>
         </div>
       </div>
