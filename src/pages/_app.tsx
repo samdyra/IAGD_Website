@@ -14,7 +14,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <ClerkProvider {...pageProps}>
         <Head>
           <title>Template</title>
-          <meta name="description" content="Fruits" />
+          <meta name="IAGD'S Website" content="Website Pemilu IAGD" />
           <link rel="icon" href="../../public/logomini.png" />
         </Head>
         <Toaster position="top-center" />
