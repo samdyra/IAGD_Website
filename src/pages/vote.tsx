@@ -71,7 +71,11 @@ export default function Vote() {
         />
       ),
       success: (
-        <SuccessScreen phoneNumber={phoneNumber} voterToken={voterToken} />
+        <SuccessScreen
+          phoneNumber={phoneNumber}
+          voterToken={voterToken}
+          voteNum={selectNum}
+        />
       ),
     };
 
@@ -442,6 +446,7 @@ function Modal({
 type Props = {
   phoneNumber: string;
   voterToken: string;
+  voteNum: number;
 };
 
 function hideStringExceptLast3Digits(input: string): string {
@@ -459,7 +464,7 @@ function hideStringExceptLast3Digits(input: string): string {
 const shareText =
   "Yuk, jangan lupa untuk menggunakan hak suaranya ya dalam Pemilu IAGD 2023. Berikan suaramu untuk menciptakan perubahan positif bersama-sama! https://www.iagd-itb.com/ ";
 
-const SuccessScreen = ({ phoneNumber, voterToken }: Props) => {
+const SuccessScreen = ({ phoneNumber, voterToken, voteNum }: Props) => {
   return (
     <div className="bgp h-screen  w-screen overflow-scroll">
       <h1 className="pt-16 text-center text-4xl font-semibold text-white">
@@ -486,7 +491,7 @@ const SuccessScreen = ({ phoneNumber, voterToken }: Props) => {
         </svg>
 
         <h1 className="pt-24 text-center text-2xl font-semibold text-white">
-          Kamu telah berhasil memilih <br></br>Calon Nomor 2
+          Kamu telah berhasil memilih <br></br>Calon Nomor {voteNum}
         </h1>
         <div className="mt-12 flex justify-between px-8">
           <p className="w-fit text-lg  text-white">Notelp Pemilih</p>
