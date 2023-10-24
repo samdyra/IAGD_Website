@@ -466,7 +466,7 @@ const shareText =
 
 const SuccessScreen = ({ phoneNumber, voterToken, voteNum }: Props) => {
   return (
-    <div className="bgp h-screen  w-screen overflow-scroll">
+    <div className="bgp h-screen  w-screen overflow-scroll pb-24">
       <h1 className="pt-16 text-center text-4xl font-semibold text-white">
         Terima kasih Telah Memilih!
       </h1>
