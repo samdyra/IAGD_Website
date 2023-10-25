@@ -64,7 +64,7 @@ export default function Home() {
       </div>
 
       <MilestoneElement />
-      <div className="container mx-auto sm:mb-32">
+      {/* <div className="container mx-auto sm:mb-32">
         <h2 className="tcs pt-8 text-center text-2xl font-semibold sm:text-3xl ">
           Sambutan Ketua Umum IAGD <br /> 2020-2023
         </h2>
@@ -74,7 +74,7 @@ export default function Home() {
           heading={cardData.heading}
           subheading={cardData.subheading}
         />
-      </div>
+      </div> */}
       <h2 className="tcs mx-auto max-w-[620px] px-4 pt-6 text-center text-2xl font-semibold sm:text-3xl">
         Daftar Calon Kandidat Ketua Umum IAGD 2020-2023 (TBA)
       </h2>
@@ -177,11 +177,11 @@ export default function Home() {
               IAGD
             </p>
 
-            <Link href="/vote">
+            {/* <Link href="/vote">
               <button className="bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white sm:mr-4">
                 Vote Sekarang
               </button>
-            </Link>
+            </Link> */}
             <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
               <button className="bgs mx-auto mt-4 rounded-md px-14 py-4 text-white hover:bg-blue-950 hover:text-white">
                 Daftar Sebagai Pemilih
@@ -197,14 +197,14 @@ export default function Home() {
             <div className="rounded-lg bg-white p-1">
               <Image src={logo} width={113} alt="logo-iagd"></Image>
             </div>
-            <Link href="/vote">
+            {/* <Link href="/vote">
               <button
                 className="tcp flex rounded-lg border bg-white p-4   align-middle font-semibold"
                 type="button"
               >
                 0821893897 (Amal)
               </button>
-            </Link>
+            </Link> */}
           </div>
 
           <div className=" flex w-full flex-col items-center justify-between pt-4 text-white  sm:flex-row">
@@ -257,13 +257,13 @@ const Navbar = () => {
     <nav className="flex justify-between border-2 p-[16px] sm:px-16">
       <Image src={logo} width={113} alt="logo-iagd"></Image>
       <div className="flex gap-4">
-        <Link href="/vote" className="hidden sm:block">
+        {/* <Link href="/vote" className="hidden sm:block">
           <div className="bgp flex rounded-lg border p-3 align-middle">
             <button className="font-semibold text-white" type="button">
               Vote Sekarang
             </button>
           </div>
-        </Link>
+        </Link> */}
         <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
           <div className="bgs flex rounded-lg border p-3 align-middle">
             <button className="font-semibold text-white" type="button">
