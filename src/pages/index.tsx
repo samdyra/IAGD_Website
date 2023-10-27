@@ -7,10 +7,21 @@ import Link from "next/link";
 import { type StaticImageData } from "next/image";
 // import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
 export default function Home() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const handleToggleModal = () => {
+    setIsModalVisible((prevState) => !prevState);
+  };
+
   return (
     <>
+      <Modal
+        handleHideModal={handleToggleModal}
+        isModalVisible={isModalVisible}
+      />
       <Head>
         <title>IAGD ITB</title>
         <meta name="IAGD'S Website" content="Website Voting IAGD" />
@@ -21,16 +32,19 @@ export default function Home() {
       <div className="bgnew relative h-[720px] rounded-b-[50px]">
         <MiscIAGDIcon />
         <div className="mt-[100px] sm:mt-[100px] ">
-          <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
-            <div className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl">
-              <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
-                <h1 className="font-semibold ">Segera Daftar!</h1>
-              </div>
-              <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
-                <h1 className="font-semibold ">Klik disini!</h1>
-              </div>
+          {/* <Link href="https://forms.gle/F7i16CPTEgLYfRRd8"> */}
+          <div
+            className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
+            onClick={handleToggleModal}
+          >
+            <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
+              <h1 className="font-semibold ">Segera Daftar Dengan </h1>
             </div>
-          </Link>
+            <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
+              <h1 className="font-semibold ">Klik disini!</h1>
+            </div>
+          </div>
+          {/* </Link> */}
           <h1 className=" mx-auto mb-2 max-w-[1120px]  px-4 text-center text-4xl font-extrabold leading-tight drop-shadow-md md:text-[3rem] lg:text-[4rem]">
             Pemilu <span className="gt">Ikatan Alumni Geodesi </span>
             (IAGD) 2023
@@ -182,6 +196,11 @@ export default function Home() {
                 Vote Sekarang
               </button>
             </Link> */}
+            <Link href="https://bit.ly/BerkasPemiluIAGD2023">
+              <button className="bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white sm:mr-4">
+                Daftar Sebagai Calon Ketua
+              </button>
+            </Link>
             <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
               <button className="bgs mx-auto mt-4 rounded-md px-14 py-4 text-white hover:bg-blue-950 hover:text-white">
                 Daftar Sebagai Pemilih
@@ -253,26 +272,70 @@ export default function Home() {
 }
 
 const Navbar = () => {
+  const [isNavbarOpen, setIsNavbarOpen] = useState({
+    isOpened: false,
+    style: "burgerbar",
+  });
+
+  const handleToggleNavbar = () => {
+    setIsNavbarOpen({
+      isOpened: isNavbarOpen.isOpened ? false : true,
+      style: isNavbarOpen.isOpened ? "burgerbar" : "burgerbar2",
+    });
+  };
+
   return (
-    <nav className="flex justify-between border-2 p-[16px] sm:px-16">
-      <Image src={logo} width={113} alt="logo-iagd"></Image>
-      <div className="flex gap-4">
-        {/* <Link href="/vote" className="hidden sm:block">
-          <div className="bgp flex rounded-lg border p-3 align-middle">
-            <button className="font-semibold text-white" type="button">
-              Vote Sekarang
-            </button>
-          </div>
-        </Link> */}
-        <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
-          <div className="bgs flex rounded-lg border p-3 align-middle">
-            <button className="font-semibold text-white" type="button">
-              Daftar Sebagai Pemilih
-            </button>
-          </div>
-        </Link>
-      </div>
-    </nav>
+    <div className="border-b-2">
+      <nav className="flex items-center justify-between  border-b-2 p-[16px] sm:px-16 ">
+        <Image src={logo} width={113} alt="logo-iagd"></Image>
+        <div className="burgermenu md:hidden" onClick={handleToggleNavbar}>
+          <div className={isNavbarOpen.style}></div>
+          <div className={isNavbarOpen.style}></div>
+          <div className={isNavbarOpen.style}></div>
+        </div>
+
+        <div className="hidden gap-4 md:flex">
+          {/* <Link href="/vote" className="hidden sm:block">
+            <div className="bgp flex rounded-lg border p-3 align-middle">
+              <button className="font-semibold text-white" type="button">
+                Vote Sekarang
+              </button>
+            </div>
+          </Link> */}
+          <Link
+            href="https://bit.ly/BerkasPemiluIAGD2023"
+            className="hidden sm:block"
+          >
+            <div className="bgp flex rounded-lg border p-3 align-middle">
+              <button className="font-semibold text-white" type="button">
+                Daftar Sebagai Calon Ketua
+              </button>
+            </div>
+          </Link>
+          <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
+            <div className="bgs flex rounded-lg border p-3 align-middle">
+              <button className="font-semibold text-white" type="button">
+                Daftar Sebagai Pemilih
+              </button>
+            </div>
+          </Link>
+        </div>
+      </nav>
+      {isNavbarOpen.isOpened && (
+        <div className="top-22 h-30 z-50 w-full p-4 ">
+          <Link href="https://bit.ly/BerkasPemiluIAGD2023">
+            <p className="tcp text-md mb-2 w-fit cursor-pointer border-b border-[#EA7227] font-semibold text-white focus:opacity-75">
+              • Klik disini untuk daftar sebagai Calon ketua
+            </p>
+          </Link>
+          <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
+            <p className=" tcp text-md w-fit cursor-pointer border-b border-[#EA7227] font-semibold text-white focus:opacity-75">
+              • Klik disini untuk daftar sebagai pemilih
+            </p>
+          </Link>
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -559,3 +622,38 @@ const SocmedDetails = () => (
     </a>
   </div>
 );
+
+interface IProps {
+  isModalVisible: boolean;
+  handleHideModal: () => void;
+}
+
+function Modal({ handleHideModal, isModalVisible }: IProps) {
+  return (
+    <AnimatePresence>
+      {isModalVisible ? (
+        <>
+          <div
+            className="fixed z-50 h-screen w-screen  bg-white/30 backdrop-blur-md "
+            onClick={handleHideModal}
+          />
+          <div
+            aria-hidden="true"
+            className="fixed inset-x-0 top-[30%] z-50 mx-auto flex w-[320px] flex-col gap-4 rounded-lg border-2 border-[#EA7227] bg-white p-8 md:w-[450px]"
+          >
+            <Link href="https://forms.gle/F7i16CPTEgLYfRRd8" className="w-full">
+              <div className="rounded-lg bg-[#EA7227] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-600 ">
+                Daftar Sebagai Pemilih
+              </div>
+            </Link>
+            <Link href="https://bit.ly/BerkasPemiluIAGD2023">
+              <div className="bgs rounded-lg border border-gray-200 px-5 py-2.5 text-center text-sm font-medium text-white  hover:bg-blue-950">
+                Daftar Sebagai Calon Ketua
+              </div>
+            </Link>
+          </div>
+        </>
+      ) : null}
+    </AnimatePresence>
+  );
+}
