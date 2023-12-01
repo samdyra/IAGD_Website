@@ -9,11 +9,14 @@ import { type StaticImageData } from "next/image";
 import "@splidejs/react-splide/css";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { push } = useRouter();
+
   const handleToggleModal = () => {
-    setIsModalVisible((prevState) => !prevState);
+    push("/vote").catch(() => console.error("Something Went Wrong"));
   };
 
   return (
@@ -32,19 +35,18 @@ export default function Home() {
       <div className="bgnew relative h-[720px] rounded-b-[50px]">
         <MiscIAGDIcon />
         <div className="mt-[100px] sm:mt-[100px] ">
-          {/* <Link href="https://forms.gle/F7i16CPTEgLYfRRd8"> */}
           <div
             className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
             onClick={handleToggleModal}
           >
             <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
-              <h1 className="font-semibold ">Segera Daftar Dengan </h1>
+              <h1 className="font-semibold ">Segera Vote Dengan</h1>
             </div>
             <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
               <h1 className="font-semibold ">Klik disini!</h1>
             </div>
           </div>
-          {/* </Link> */}
+
           <h1 className=" mx-auto mb-2 max-w-[1120px]  px-4 text-center text-4xl font-extrabold leading-tight drop-shadow-md md:text-[3rem] lg:text-[4rem]">
             Pemilu <span className="gt">Ikatan Alumni Geodesi </span>
             (IAGD) 2023
@@ -191,12 +193,12 @@ export default function Home() {
               IAGD
             </p>
 
-            {/* <Link href="/vote">
+            <Link href="/vote">
               <button className="bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white sm:mr-4">
                 Vote Sekarang
               </button>
-            </Link> */}
-            <Link href="https://bit.ly/BerkasPemiluIAGD2023">
+            </Link>
+            {/* <Link href="https://bit.ly/BerkasPemiluIAGD2023">
               <button className="bgp  mx-auto  mt-14 rounded-md px-14 py-4 text-white hover:bg-orange-500 hover:text-white sm:mr-4">
                 Daftar Sebagai Calon Ketua
               </button>
@@ -205,7 +207,7 @@ export default function Home() {
               <button className="bgs mx-auto mt-4 rounded-md px-14 py-4 text-white hover:bg-blue-950 hover:text-white">
                 Daftar Sebagai Pemilih
               </button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
@@ -288,21 +290,21 @@ const Navbar = () => {
     <div className="border-b-2">
       <nav className="flex items-center justify-between  border-b-2 p-[16px] sm:px-16 ">
         <Image src={logo} width={113} alt="logo-iagd"></Image>
-        <div className="burgermenu md:hidden" onClick={handleToggleNavbar}>
+        {/* <div className="burgermenu md:hidden" onClick={handleToggleNavbar}>
           <div className={isNavbarOpen.style}></div>
           <div className={isNavbarOpen.style}></div>
           <div className={isNavbarOpen.style}></div>
-        </div>
+        </div> */}
+        <Link href="/vote">
+          <div className="bgp flex rounded-lg border p-3 align-middle">
+            <button className="font-semibold text-white" type="button">
+              Vote Sekarang
+            </button>
+          </div>
+        </Link>
 
-        <div className="hidden gap-4 md:flex">
-          {/* <Link href="/vote" className="hidden sm:block">
-            <div className="bgp flex rounded-lg border p-3 align-middle">
-              <button className="font-semibold text-white" type="button">
-                Vote Sekarang
-              </button>
-            </div>
-          </Link> */}
-          <Link
+        {/* <div className=" gap-4 md:flex"> */}
+        {/* <Link
             href="https://bit.ly/BerkasPemiluIAGD2023"
             className="hidden sm:block"
           >
@@ -318,10 +320,10 @@ const Navbar = () => {
                 Daftar Sebagai Pemilih
               </button>
             </div>
-          </Link>
-        </div>
+          </Link> */}
+        {/* </div> */}
       </nav>
-      {isNavbarOpen.isOpened && (
+      {/* {isNavbarOpen.isOpened && (
         <div className="top-22 h-30 z-50 w-full p-4 ">
           <Link href="https://bit.ly/BerkasPemiluIAGD2023">
             <p className="tcp text-md mb-2 w-fit cursor-pointer border-b border-[#EA7227] font-semibold text-white focus:opacity-75">
@@ -334,7 +336,7 @@ const Navbar = () => {
             </p>
           </Link>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
