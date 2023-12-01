@@ -35,6 +35,9 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "node-xlsx": "^0.23.0",
+    "mysql2": "^3.6.5",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@types/eslint": "^8.37.0",
     "@types/node": "^18.16.0",
     "@types/prettier": "^2.7.2",
