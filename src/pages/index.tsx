@@ -37,13 +37,13 @@ export default function Home() {
         <div className="mt-[100px] sm:mt-[100px] ">
           <div
             className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
-            onClick={handleToggleModal}
+            // onClick={handleToggleModal}
           >
             <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
-              <h1 className="font-semibold ">Segera Vote Dengan</h1>
+              <h1 className="font-semibold ">Vote akan dimulai pada: </h1>
             </div>
             <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
-              <h1 className="font-semibold ">Klik disini!</h1>
+              <h1 className="font-semibold ">7 Desember 2023</h1>
             </div>
           </div>
 
