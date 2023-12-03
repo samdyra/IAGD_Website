@@ -3,6 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import phone from "../../public/Phone.png";
+import kandidat1 from "../../public/kandidat1.png";
+import kandidat2 from "../../public/kandidat2.png";
+
 import Link from "next/link";
 import { type StaticImageData } from "next/image";
 // import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -40,7 +43,7 @@ export default function Home() {
             // onClick={handleToggleModal}
           >
             <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
-              <h1 className="font-semibold ">Vote akan dimulai pada: </h1>
+              <h1 className="font-semibold ">Vote dimulai: </h1>
             </div>
             <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
               <h1 className="font-semibold ">7 Desember 2023</h1>
@@ -92,30 +95,24 @@ export default function Home() {
         />
       </div> */}
       <h2 className="tcs mx-auto max-w-[620px] px-4 pt-6 text-center text-2xl font-semibold sm:text-3xl">
-        Daftar Calon Kandidat Ketua Umum IAGD 2020-2023 (TBA)
+        Daftar Calon Kandidat Ketua Umum IAGD 2023
       </h2>
 
       <div className="relative ">
-        <div className="absolute h-full w-full  bg-white/30 backdrop-blur-sm">
-          <div className="bgp inset-x-0 mx-auto mt-80 h-60 w-[375px] items-center rounded-lg border-2  bg-white text-center shadow-md xl:mt-32">
-            <h1 className="mt-[81px] px-10 text-xl font-semibold text-white">
-              Calon Kandidat Ketua umum IAGD akan diumumkan segera
-            </h1>
-          </div>
-        </div>
-
         <div className="mx-auto my-16 max-w-[1024px] xl:mt-10 xl:flex xl:gap-7">
           <ProfileCard
             visi={cardData2.body}
             badge={cardData2.badge}
-            heading="Nama Kandidat 1"
+            heading="M. Gunawan Raditya"
             subheading="Kandidat Nomor 1"
+            image={<ImageCandidate1 />}
           />
           <ProfileCard
             visi={cardData2.body}
             badge={cardData2.badge}
-            heading="Nama Kandidat 2"
+            heading="Hesekiel Sijabat"
             subheading="Kandidat Nomor 2"
+            image={<ImageCandidate2 />}
           />
         </div>
       </div>
@@ -272,6 +269,28 @@ export default function Home() {
     </>
   );
 }
+
+const ImageCandidate1 = () => {
+  return (
+    <Image
+      src={kandidat1}
+      alt="Profile Badge"
+      title="Profile Badge"
+      className="imgCustom1 relative h-[220px] w-full rounded-t-lg border-2 object-cover"
+    />
+  );
+};
+
+const ImageCandidate2 = () => {
+  return (
+    <Image
+      src={kandidat2}
+      alt="Profile Badge"
+      title="Profile Badge"
+      className="imgCustom2 relative h-[220px] w-full rounded-t-lg border-2 object-cover"
+    />
+  );
+};
 
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState({
@@ -484,21 +503,18 @@ interface ProfileCardProps {
   badge: StaticImageData;
   heading: string;
   subheading: string;
+  image: React.ReactNode;
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
   visi,
   heading,
   subheading,
+  image,
 }) => {
   return (
-    <div className="aspect mx-auto mb-8 aspect-[3/5] h-[540px] rounded-lg bg-white shadow-lg sm:h-[640px]">
-      <img
-        src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-        alt="Profile Badge"
-        title="Profile Badge"
-        className="h-[180px] w-full rounded-t-lg object-cover"
-      />
+    <div className="aspect mx-auto mb-8 aspect-[60/100] h-[540px] rounded-lg bg-white shadow-lg sm:h-[640px]">
+      {image}
       <div className="mt-2 flex w-full flex-col p-4 sm:py-7">
         <h3 className="tcs text-center text-lg font-bold  sm:text-xl">
           {heading}
@@ -517,9 +533,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           omnis excepturi laborum asperiores cupiditate deserunt ipsum commodi
           error animi!
         </p>
-        <button className="border-p tcp mx-auto  mb-2 mt-5 w-1/2 rounded-md border-2 px-4 py-2 hover:bg-orange-500 hover:text-white sm:mt-7">
-          Read more
-        </button>
       </div>
     </div>
   );

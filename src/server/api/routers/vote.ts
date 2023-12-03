@@ -1,26 +1,26 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-import { Redis } from "@upstash/redis";
-import { Ratelimit } from "@upstash/ratelimit";
+// import { Redis } from "@upstash/redis";
+// import { Ratelimit } from "@upstash/ratelimit";
 
-const rateLimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.fixedWindow(10, "180 s"),
-});
+// const rateLimit = new Ratelimit({
+//   redis: Redis.fromEnv(),
+//   limiter: Ratelimit.fixedWindow(10, "180 s"),
+// });
 
 export const voteRouter = createTRPCRouter({
   validateVoterToken: publicProcedure
     .input(z.object({ phoneNumber: z.string(), voterToken: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const ip = ctx.ipAddress;
-      const { success, reset } = await rateLimit.limit(ip ?? "");
+      // const ip = ctx.ipAddress;
+      // const { success, reset } = await rateLimit.limit(ip ?? "");
 
-      if (!success) {
-        const now = Date.now();
-        const retryAfter = Math.floor((reset - now) / 1000);
-        throw new Error(`Too Many Request, retry after ${retryAfter} second`);
-      }
+      // if (!success) {
+      //   const now = Date.now();
+      //   const retryAfter = Math.floor((reset - now) / 1000);
+      //   throw new Error(`Too Many Request, retry after ${retryAfter} second`);
+      // }
 
       // Attempt to find a voter with the given voterToken
       const voter = await ctx.prisma.voter.findUnique({
