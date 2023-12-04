@@ -263,3 +263,9 @@
 .imgCustom2 {
   object-position: 0px 15%;
 }
+
+.centerFix {
+  top: 50%;
+  /* left: 50%; */
+  transform: translate(0, -50%);
+}

@@ -3,6 +3,9 @@ import Head from "next/head";
 import { type Dispatch } from "react";
 import { type SetStateAction } from "react";
 import Link from "next/link";
+import kandidat1 from "../../public/kandidat1.png";
+import kandidat2 from "../../public/kandidat2.png";
+import Image from "next/image";
 
 import { api } from "~/utils/api";
 import { useState } from "react";
@@ -262,16 +265,18 @@ const FormInputValidation = ({
 
 const candidateExample = [
   {
-    name: "Lionel Messi",
+    name: "M. Gunawan Raditya",
     num: 1,
     vision:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, iure?",
+    img: kandidat1,
   },
   {
-    name: "Cristiano Ronaldo",
+    name: "Hesekiel Sijabat",
     num: 2,
     vision:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, iure?",
+    img: kandidat2,
   },
 ];
 
@@ -316,11 +321,12 @@ const FormInputVoting = ({
                     </h1>
                   )}
                 </div>
-                <img
-                  alt="user"
-                  className="relative z-10 mx-auto mt-2 aspect-[1/1] h-[160px] overflow-hidden rounded-full border-2"
-                  src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-                ></img>
+                <Image
+                  src={candidate.img}
+                  alt="Profile Badge"
+                  title="Profile Badge"
+                  className="imgCustom2 relative z-10 mx-auto mt-2 h-[160px] w-[160px] overflow-hidden rounded-full border-2 object-cover"
+                />
                 <div className="relative -top-[40px] h-[250px] w-full rounded-lg   border-gray-800 bg-white px-5 pt-12 shadow-md backdrop-blur-md md:h-[280px]">
                   <h1 className="z-30 text-center text-lg  text-gray-900">
                     Nomor Urut {candidate.num}

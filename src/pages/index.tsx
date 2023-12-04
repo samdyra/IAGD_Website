@@ -8,25 +8,33 @@ import kandidat2 from "../../public/kandidat2.png";
 
 import Link from "next/link";
 import { type StaticImageData } from "next/image";
-// import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 export default function Home() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const { push } = useRouter();
+  const [isModalVisible, setIsModalVisible] = useState({
+    isVisible: false,
+    candidate: 1,
+  });
+  // const { push } = useRouter();
+
+  // const handleToggleModal = () => {
+  //   push("/vote").catch(() => console.error("Something Went Wrong"));
+  // };
 
   const handleToggleModal = () => {
-    push("/vote").catch(() => console.error("Something Went Wrong"));
+    setIsModalVisible({ isVisible: false, candidate: 0 });
   };
 
   return (
     <>
       <Modal
         handleHideModal={handleToggleModal}
-        isModalVisible={isModalVisible}
+        canNum={isModalVisible.candidate}
+        isModalVisible={isModalVisible.isVisible}
       />
       <Head>
         <title>IAGD ITB</title>
@@ -101,18 +109,36 @@ export default function Home() {
       <div className="relative ">
         <div className="mx-auto my-16 max-w-[1024px] xl:mt-10 xl:flex xl:gap-7">
           <ProfileCard
-            visi={cardData2.body}
+            visi={`TBA`}
             badge={cardData2.badge}
             heading="M. Gunawan Raditya"
             subheading="Kandidat Nomor 1"
             image={<ImageCandidate1 />}
+            imageURLs={[]}
+            setOpenModal={() =>
+              setIsModalVisible((prev) => {
+                return {
+                  isVisible: !prev.isVisible,
+                  candidate: 1,
+                };
+              })
+            }
           />
           <ProfileCard
-            visi={cardData2.body}
+            visi={`"Menghimpun Alumni Teknik Geodesi dan Geomatika ITB menjadi lebih solid dan Profesional"`}
             badge={cardData2.badge}
             heading="Hesekiel Sijabat"
             subheading="Kandidat Nomor 2"
             image={<ImageCandidate2 />}
+            imageURLs={[]}
+            setOpenModal={() =>
+              setIsModalVisible((prev) => {
+                return {
+                  isVisible: !prev.isVisible,
+                  candidate: 2,
+                };
+              })
+            }
           />
         </div>
       </div>
@@ -504,6 +530,8 @@ interface ProfileCardProps {
   heading: string;
   subheading: string;
   image: React.ReactNode;
+  imageURLs?: string[];
+  setOpenModal: () => void;
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
@@ -511,6 +539,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   heading,
   subheading,
   image,
+  setOpenModal,
 }) => {
   return (
     <div className="aspect mx-auto mb-8 aspect-[60/100] h-[540px] rounded-lg bg-white shadow-lg sm:h-[640px]">
@@ -522,17 +551,20 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         <h4 className="text-md 2 text-center font-semibold sm:text-lg">
           {subheading}
         </h4>
-        <div className="my-2 sm:my-4">
-          <SocmedDetails />
-        </div>
-        <h4 className="tcp my-1 text-center text-lg font-semibold sm:text-2xl">
+        <div className="my-1 sm:my-2">{/* <SocmedDetails /> */}</div>
+        <h4 className="tcp my-2 text-center text-lg font-semibold sm:text-2xl">
           Visi
         </h4>
-        <p className="text-md  px-4 text-justify sm:my-3 sm:text-lg">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum fuga
-          omnis excepturi laborum asperiores cupiditate deserunt ipsum commodi
-          error animi!
+        <p className="text-md  h-[120px] px-4 text-center sm:my-3 sm:text-lg">
+          {visi}
         </p>
+        <button
+          className="bgp rounded-md py-4 align-bottom text-sm font-semibold text-white hover:bg-orange-500 "
+          type="button"
+          onClick={setOpenModal}
+        >
+          Pelajari Lebih Lanjut
+        </button>
       </div>
     </div>
   );
@@ -584,7 +616,7 @@ const SocmedDetails = () => (
         ></path>
       </svg>
     </a>
-    <a
+    {/* <a
       className="text-gray-700 hover:text-orange-600"
       aria-label="Visit TrendyMinds Facebook"
       href=""
@@ -600,7 +632,7 @@ const SocmedDetails = () => (
           d="m279.14 288 14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
         ></path>
       </svg>
-    </a>
+    </a> */}
     <a
       className="text-gray-700 hover:text-orange-600"
       aria-label="Visit TrendyMinds Instagram"
@@ -618,7 +650,7 @@ const SocmedDetails = () => (
         ></path>
       </svg>
     </a>
-    <a
+    {/* <a
       className="text-gray-700 hover:text-orange-600"
       aria-label="Visit TrendyMinds Twitter"
       href=""
@@ -634,38 +666,90 @@ const SocmedDetails = () => (
           d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
         ></path>
       </svg>
-    </a>
+    </a> */}
   </div>
 );
 
 interface IProps {
   isModalVisible: boolean;
-  handleHideModal: () => void;
+  handleHideModal: (param: number) => void;
+  canNum: number;
 }
 
-function Modal({ handleHideModal, isModalVisible }: IProps) {
+function Modal({ handleHideModal, isModalVisible, canNum }: IProps) {
   return (
     <AnimatePresence>
       {isModalVisible ? (
         <>
           <div
             className="fixed z-50 h-screen w-screen  bg-white/30 backdrop-blur-md "
-            onClick={handleHideModal}
+            onClick={() => handleHideModal(0)}
           />
           <div
             aria-hidden="true"
-            className="fixed inset-x-0 top-[30%] z-50 mx-auto flex w-[320px] flex-col gap-4 rounded-lg border-2 border-[#EA7227] bg-white p-8 md:w-[450px]"
+            className="bgp centerFix fixed inset-x-0 z-50 mx-auto  h-[620px] w-[375px] rounded-lg border-2 border-[#EA7227] sm:h-[720px] sm:w-[500px]"
           >
-            <Link href="https://forms.gle/F7i16CPTEgLYfRRd8" className="w-full">
-              <div className="rounded-lg bg-[#EA7227] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-orange-600 ">
-                Daftar Sebagai Pemilih
-              </div>
-            </Link>
-            <Link href="https://bit.ly/BerkasPemiluIAGD2023">
-              <div className="bgs rounded-lg border border-gray-200 px-5 py-2.5 text-center text-sm font-medium text-white  hover:bg-blue-950">
-                Daftar Sebagai Calon Ketua
-              </div>
-            </Link>
+            {canNum === 2 ? (
+              <Splide
+                className="items-center "
+                options={{
+                  rewind: true,
+                  gap: "1rem",
+                }}
+              >
+                <SplideSlide className="flex items-center justify-center pt-10">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/watermelongisapp.appspot.com/o/1.%20Profil.png?alt=media&token=3d0fa2fc-6909-409f-ba3d-bff9d5a11568"
+                    alt="card image"
+                    className="border-gray h-[550px] border-2 object-cover sm:h-[640px]"
+                  />
+                </SplideSlide>
+                <SplideSlide className="flex items-center justify-center pt-10">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/watermelongisapp.appspot.com/o/2.%20Visi.png?alt=media&token=73e0f1b1-6e9a-4e27-8ff8-703e1edda2b2"
+                    alt="card image"
+                    className="border-gray h-[550px] border-2 object-cover sm:h-[640px]"
+                  />
+                </SplideSlide>
+                <SplideSlide className="flex items-center justify-center pt-10">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/watermelongisapp.appspot.com/o/3.%20Misi.png?alt=media&token=f7b77cae-1123-47c8-837f-46c610839426"
+                    alt="card image"
+                    className="border-gray h-[550px] border-2 object-cover sm:h-[640px]"
+                  />
+                </SplideSlide>
+                <SplideSlide className="flex items-center justify-center pt-10">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/watermelongisapp.appspot.com/o/4.%20Program%20Kerja.png?alt=media&token=4954b34f-b44f-420c-9440-ee161c60fb05"
+                    alt="card image"
+                    className="border-gray h-[550px] border-2 object-cover sm:h-[640px]"
+                  />
+                </SplideSlide>
+                <SplideSlide className="flex items-center justify-center pt-10">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/watermelongisapp.appspot.com/o/5.%20Quote.png?alt=media&token=6e6532e6-9971-4730-bb0d-ba44d10a8c1c"
+                    alt="card image"
+                    className="border-gray h-[550px] border-2 object-cover sm:h-[640px]"
+                  />
+                </SplideSlide>
+              </Splide>
+            ) : (
+              <Splide
+                className="items-center "
+                options={{
+                  rewind: true,
+                  gap: "1rem",
+                }}
+              >
+                <SplideSlide className="flex items-center justify-center pt-10">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/watermelongisapp.appspot.com/o/Posterr%20(4)%20(1).jpg?alt=media&token=fde10f73-6447-488b-b8a3-0698d472b5a4"
+                    alt="card image"
+                    className="border-gray h-[550px] border-2 object-cover sm:h-[640px]"
+                  />
+                </SplideSlide>
+              </Splide>
+            )}
           </div>
         </>
       ) : null}
