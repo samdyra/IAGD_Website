@@ -423,25 +423,29 @@ const MilestoneElement: React.FC = () => {
 
   const electionTimeline: ElectionEvent[] = [
     {
-      date: "20 Oktober - 3 November",
-      description: "Pendaftaran calon ketua IAGD",
+      date: "20 Oktober - 25 November",
+      description: "Periode pendaftaran calon ketua IAGD",
     },
     {
-      date: "25 Oktober - 8 November 2023",
-      description: "Periode pendaftaran pemilih",
+      date: "25 Oktober - 26 November 2023",
+      description: "Periode pendaftaran calon pemilih",
     },
     {
-      date: "4 November - 18 November 2023",
-      description: "Kampanye dari masing-masing kandidat calon",
+      date: "1 Desember 2023",
+      description: "Pengumuman calon dan start Kampanye dari calon",
     },
     {
-      date: "11 November",
+      date: "3 Desember",
       description: "Rilis daftar pemilih tetap",
     },
-    { date: "25 November", description: "Pemungutan suara" },
+    { date: "6 Desember", description: "Pengiriman token pada daftar pemilih" },
     {
-      date: "26 November",
-      description: "Pengumuman Ketua Terpilih",
+      date: "7 Desember - 10 Desember (15:00 WIB)",
+      description: "Periode Voting Online",
+    },
+    {
+      date: "10 Desember",
+      description: "Pengumuman ketua terpilih",
     },
   ];
 
@@ -470,7 +474,7 @@ const MilestoneElement: React.FC = () => {
             key={idx}
             className="relative mx-auto flex h-14 w-full items-center justify-center sm:h-44  sm:w-36 sm:flex-col"
           >
-            <h3 className="w-5/12 text-center text-xs font-semibold text-gray-800 sm:h-16 sm:w-full sm:pt-4 lg:text-base">
+            <h3 className="w-5/12 text-center text-xs font-semibold text-gray-800 sm:h-16 sm:w-full sm:pt-4 lg:text-sm">
               {event.date}
             </h3>
             <div className="relative  flex h-16 w-16 items-center justify-center sm:mb-0 sm:h-12 sm:w-12">
