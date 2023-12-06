@@ -3,8 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import phone from "../../public/Phone.png";
-import kandidat1 from "../../public/kandidat1.png";
-import kandidat2 from "../../public/kandidat2.png";
 
 import Link from "next/link";
 import { type StaticImageData } from "next/image";
@@ -151,18 +149,16 @@ export default function Home() {
         </div>
       </div>
 
-      {/* <div className="mt-20  sm:mb-32">
+      <div className="mt-20  sm:mb-32">
         <h2 className="tcs mx-auto max-w-[620px] pt-6 text-center text-2xl font-semibold sm:text-3xl">
           Galeri Foto Pemilu IAGD
         </h2>
         <div className="container mx-auto  my-12 gap-4 sm:flex sm:justify-between">
           <Splide
             options={{
+              type: "loop",
               rewind: true,
-              // wheel: true,
-              lazyLoad: true,
-              // isNavigation: true,
-              pagination: true,
+              pagination: false,
               breakpoints: {
                 2000: {
                   perPage: 4,
@@ -188,20 +184,32 @@ export default function Home() {
             className="splide mx-auto flex w-full justify-center "
           >
             <SplideSlide className="flex w-full justify-center ">
-              <ImageCard />
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd1.jpeg?alt=media&token=811bd23f-f058-43bc-a1fa-6761f3179af9" />
             </SplideSlide>
             <SplideSlide className="flex w-full justify-center ">
-              <ImageCard />
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd2.jpeg?alt=media&token=486d44e2-1bbe-44ca-bc3d-ab8cba7dc734" />
             </SplideSlide>
             <SplideSlide className="flex w-full justify-center ">
-              <ImageCard />
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd3.jpeg?alt=media&token=a2f4b7f1-2f7b-48e0-9b5b-eaa0367ce796" />
             </SplideSlide>
             <SplideSlide className="flex w-full justify-center ">
-              <ImageCard />
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd4.jpeg?alt=media&token=c5781dc5-47ea-4fde-80ed-6a9f36123a56" />
+            </SplideSlide>
+            <SplideSlide className="flex w-full justify-center ">
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd5.jpeg?alt=media&token=6e3b8f64-fb6c-4993-84cf-e30e1ed6f8d4" />
+            </SplideSlide>
+            <SplideSlide className="flex w-full justify-center ">
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd6.jpeg?alt=media&token=57d1a4d6-812f-4012-a8a4-b35451a85c6c" />
+            </SplideSlide>
+            <SplideSlide className="flex w-full justify-center ">
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd7.jpeg?alt=media&token=7353939d-89a4-4f61-ac69-78b4f73affb8" />
+            </SplideSlide>
+            <SplideSlide className="flex w-full justify-center ">
+              <ImageCard url="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/iagd8.jpeg?alt=media&token=243dfd81-db99-4dad-8445-c565c28da58c" />
             </SplideSlide>
           </Splide>
         </div>
-      </div> */}
+      </div>
       <div className="container mx-auto   mt-32 flex  flex-col-reverse gap-4 sm:flex-row sm:justify-between">
         <div className="flex w-full items-center justify-center sm:w-2/5 ">
           <Image
@@ -306,8 +314,8 @@ export default function Home() {
 
 const ImageCandidate1 = () => {
   return (
-    <Image
-      src={kandidat1}
+    <img
+      src="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat1.png?alt=media&token=65b3c922-f056-4ea0-b044-c059b01f1ebc"
       alt="Profile Badge"
       title="Profile Badge"
       className="imgCustom1 relative h-[220px] w-full rounded-t-lg border-2 object-cover"
@@ -317,8 +325,8 @@ const ImageCandidate1 = () => {
 
 const ImageCandidate2 = () => {
   return (
-    <Image
-      src={kandidat2}
+    <img
+      src="https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe"
       alt="Profile Badge"
       title="Profile Badge"
       className="imgCustom2 relative h-[220px] w-full rounded-t-lg border-2 object-cover"
@@ -607,28 +615,17 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   );
 };
 
-const ImageCard: React.FC = () => {
+const ImageCard = ({ url }: { url: string }) => {
   return (
     <div className="card-container">
       <div className="card">
-        <div className="img-content">
-          <Image
-            src={logo}
-            alt="card image"
-            width={100}
-            height={100}
-            className="h-full w-full"
-          />
-        </div>
-        <div className="content">
-          <p className="heading">Card Hover</p>
-          <p>
-            Mari berpartisipasi dalam pemilu IAGD! Pastikan Anda mendaftar
-            sebagai pemilih dan berikan suara Anda untuk masa depan yang lebih
-            baik. Suara Anda adalah kekuatan untuk perubahan positif kepada
-            IAGD.
-          </p>
-        </div>
+        <img
+          src={url}
+          alt="card image"
+          width={100}
+          height={100}
+          className="h-full w-full object-cover"
+        />
       </div>
     </div>
   );

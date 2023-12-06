@@ -3,8 +3,7 @@ import Head from "next/head";
 import { type Dispatch } from "react";
 import { type SetStateAction } from "react";
 import Link from "next/link";
-import kandidat1 from "../../public/kandidat1.png";
-import kandidat2 from "../../public/kandidat2.png";
+
 import Image from "next/image";
 
 import { api } from "~/utils/api";
@@ -269,14 +268,14 @@ const candidateExample = [
     num: 1,
     vision:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, iure?",
-    img: kandidat1,
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat1.png?alt=media&token=65b3c922-f056-4ea0-b044-c059b01f1ebc",
   },
   {
     name: "Hesekiel Sijabat",
     num: 2,
     vision:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, iure?",
-    img: kandidat2,
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
   },
 ];
 
@@ -321,7 +320,7 @@ const FormInputVoting = ({
                     </h1>
                   )}
                 </div>
-                <Image
+                <img
                   src={candidate.img}
                   alt="Profile Badge"
                   title="Profile Badge"
