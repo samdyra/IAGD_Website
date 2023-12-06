@@ -419,33 +419,44 @@ const MilestoneElement: React.FC = () => {
   interface ElectionEvent {
     date: string;
     description: string;
+    expired: boolean;
   }
 
   const electionTimeline: ElectionEvent[] = [
     {
       date: "20 Oktober - 25 November",
       description: "Periode pendaftaran calon ketua IAGD",
+      expired: true,
     },
     {
       date: "25 Oktober - 26 November 2023",
       description: "Periode pendaftaran calon pemilih",
+      expired: true,
     },
     {
       date: "1 Desember 2023",
       description: "Pengumuman calon dan start Kampanye dari calon",
+      expired: true,
     },
     {
       date: "3 Desember",
       description: "Rilis daftar pemilih tetap",
+      expired: true,
     },
-    { date: "6 Desember", description: "Pengiriman token pada daftar pemilih" },
+    {
+      date: "6 Desember",
+      description: "Pengiriman token pada daftar pemilih",
+      expired: false,
+    },
     {
       date: "7 Desember - 10 Desember (15:00 WIB)",
       description: "Periode Voting Online",
+      expired: false,
     },
     {
       date: "10 Desember",
       description: "Pengumuman ketua terpilih",
+      expired: false,
     },
   ];
 
@@ -474,14 +485,26 @@ const MilestoneElement: React.FC = () => {
             key={idx}
             className="relative mx-auto flex h-14 w-full items-center justify-center sm:h-44  sm:w-36 sm:flex-col"
           >
-            <h3 className="w-5/12 text-center text-xs font-semibold text-gray-800 sm:h-16 sm:w-full sm:pt-4 lg:text-sm">
+            <h3
+              className={`w-5/12 text-center text-xs font-semibold text-gray-800 sm:h-16 sm:w-full sm:pt-4 lg:text-sm ${
+                event.expired && "text-gray-300"
+              }`}
+            >
               {event.date}
             </h3>
             <div className="relative  flex h-16 w-16 items-center justify-center sm:mb-0 sm:h-12 sm:w-12">
-              <div className="bgp absolute h-6 w-6 rounded-full sm:h-6 sm:w-6"></div>
+              <div
+                className={` ${
+                  event.expired ? "bg-slate-400" : "bgp"
+                } absolute h-6 w-6 rounded-full sm:h-6 sm:w-6`}
+              ></div>
             </div>
 
-            <p className=" w-5/12 text-center text-xs  text-gray-900 sm:h-16 sm:w-full">
+            <p
+              className={`w-5/12 text-center text-xs  text-gray-900 sm:h-16 sm:w-full
+            ${event.expired && "text-gray-300"}
+            `}
+            >
               {event.description}
             </p>
           </div>
