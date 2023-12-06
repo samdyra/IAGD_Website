@@ -501,7 +501,7 @@ const MilestoneElement: React.FC = () => {
             </div>
 
             <p
-              className={`w-5/12 text-center text-xs  text-gray-900 sm:h-16 sm:w-full
+              className={`text-s w-5/12 text-center  text-gray-900 sm:h-16 sm:w-full
             ${event.expired && "text-gray-300"}
             `}
             >
