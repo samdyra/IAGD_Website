@@ -109,7 +109,11 @@ export default function Home() {
       <div className="relative ">
         <div className="mx-auto my-16 max-w-[1024px] xl:mt-10 xl:flex xl:gap-7">
           <ProfileCard
-            visi={`TBA`}
+            details={{
+              pendidikan: "S1 Teknik Geodesi dan Geomatika (2005-2011)",
+              ttl: "Palembang, 4 Desember 1986",
+              work: "Koordinator Pelaksana Internal SHG (PT. Solusi Energy Nusantara)",
+            }}
             badge={cardData2.badge}
             heading="M. Gunawan Raditya"
             subheading="Kandidat Nomor 1"
@@ -125,7 +129,11 @@ export default function Home() {
             }
           />
           <ProfileCard
-            visi={`"Menghimpun Alumni Teknik Geodesi dan Geomatika ITB menjadi lebih solid dan Profesional"`}
+            details={{
+              pendidikan: "S1 Teknik Geodesi dan Geomatika (1994-2001)",
+              ttl: "Batusangkar, 19 Mei 1975",
+              work: "Kepala Kantor Pertahanan Kabupaten Cirebon BPN",
+            }}
             badge={cardData2.badge}
             heading="Hesekiel Sijabat"
             subheading="Kandidat Nomor 2"
@@ -335,53 +343,50 @@ const Navbar = () => {
     <div className="border-b-2">
       <nav className="flex items-center justify-between  border-b-2 p-[16px] sm:px-16 ">
         <Image src={logo} width={113} alt="logo-iagd"></Image>
-        {/* <div className="burgermenu md:hidden" onClick={handleToggleNavbar}>
+        <div className="burgermenu md:hidden" onClick={handleToggleNavbar}>
           <div className={isNavbarOpen.style}></div>
           <div className={isNavbarOpen.style}></div>
           <div className={isNavbarOpen.style}></div>
-        </div> */}
-        <Link href="/vote">
-          <div className="bgp flex rounded-lg border p-3 align-middle">
+        </div>
+        {/* <Link href="/vote">
+          <div className="bgp hidden rounded-lg border p-3 align-middle md:flex">
             <button className="font-semibold text-white" type="button">
               Vote Sekarang
             </button>
           </div>
-        </Link>
+        </Link> */}
 
-        {/* <div className=" gap-4 md:flex"> */}
-        {/* <Link
-            href="https://bit.ly/BerkasPemiluIAGD2023"
-            className="hidden sm:block"
-          >
+        <div className="hidden gap-4 md:flex">
+          <Link href="/vote" className="hidden sm:block">
             <div className="bgp flex rounded-lg border p-3 align-middle">
               <button className="font-semibold text-white" type="button">
-                Daftar Sebagai Calon Ketua
+                Vote Sekarang
               </button>
             </div>
           </Link>
-          <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
+          <Link href="https://drive.google.com/drive/folders/18FotyyO2xg2BOaGTMy-n4bIapJjBpbWU">
             <div className="bgs flex rounded-lg border p-3 align-middle">
               <button className="font-semibold text-white" type="button">
-                Daftar Sebagai Pemilih
+                Daftar Pemilih
               </button>
             </div>
-          </Link> */}
-        {/* </div> */}
+          </Link>
+        </div>
       </nav>
-      {/* {isNavbarOpen.isOpened && (
+      {isNavbarOpen.isOpened && (
         <div className="top-22 h-30 z-50 w-full p-4 ">
-          <Link href="https://bit.ly/BerkasPemiluIAGD2023">
+          <Link href="/vote">
             <p className="tcp text-md mb-2 w-fit cursor-pointer border-b border-[#EA7227] font-semibold text-white focus:opacity-75">
-              • Klik disini untuk daftar sebagai Calon ketua
+              • Klik disini untuk melakukan voting
             </p>
           </Link>
-          <Link href="https://forms.gle/F7i16CPTEgLYfRRd8">
+          <Link href="https://drive.google.com/drive/folders/18FotyyO2xg2BOaGTMy-n4bIapJjBpbWU">
             <p className=" tcp text-md w-fit cursor-pointer border-b border-[#EA7227] font-semibold text-white focus:opacity-75">
-              • Klik disini untuk daftar sebagai pemilih
+              • Klik disini untuk melihat daftar pemilih
             </p>
           </Link>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
@@ -552,7 +557,11 @@ const CardComponent: React.FC<CardProps> = ({ description, subheading }) => {
 };
 
 interface ProfileCardProps {
-  visi: string;
+  details: {
+    pendidikan: string;
+    ttl: string;
+    work: string;
+  };
   badge: StaticImageData;
   heading: string;
   subheading: string;
@@ -562,7 +571,7 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
-  visi,
+  details,
   heading,
   subheading,
   image,
@@ -579,11 +588,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           {subheading}
         </h4>
         <div className="my-1 sm:my-2">{/* <SocmedDetails /> */}</div>
-        <h4 className="tcp my-2 text-center text-lg font-semibold sm:text-2xl">
-          Visi
-        </h4>
-        <p className="text-md  h-[120px] px-4 text-center sm:my-3 sm:text-lg">
-          {visi}
+        <p className="text-md  mt-2 px-4   sm:mt-6 sm:text-lg">
+          - {details.pendidikan}
+        </p>
+        <p className="text-md   px-4 sm:text-lg">- {details.ttl}</p>
+        <p className="text-md   mb-8  px-4 sm:mb-12 sm:text-lg">
+          - {details.work}
         </p>
         <button
           className="bgp rounded-md py-4 align-bottom text-sm font-semibold text-white hover:bg-orange-500 "
