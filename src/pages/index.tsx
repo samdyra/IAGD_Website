@@ -10,18 +10,18 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [isModalVisible, setIsModalVisible] = useState({
     isVisible: false,
     candidate: 1,
   });
-  // const { push } = useRouter();
+  const { push } = useRouter();
 
-  // const handleToggleModal = () => {
-  //   push("/vote").catch(() => console.error("Something Went Wrong"));
-  // };
+  const navigate = () => {
+    push("/vote").catch(() => console.error("Something Went Wrong"));
+  };
 
   const handleToggleModal = () => {
     setIsModalVisible({ isVisible: false, candidate: 0 });
@@ -46,13 +46,13 @@ export default function Home() {
         <div className="mt-[100px] sm:mt-[100px] ">
           <div
             className="mx-auto  mb-4 flex  w-fit  hover:cursor-pointer hover:opacity-75 hover:shadow-xl"
-            // onClick={handleToggleModal}
+            onClick={navigate}
           >
             <div className="rounded-l-xl border-2 border-black px-5 py-1 md:px-7 md:py-2">
-              <h1 className="font-semibold ">Vote dimulai: </h1>
+              <h1 className="font-semibold ">Segera vote dengan</h1>
             </div>
             <div className="bgp rounded-r-xl border-2 border-l-0 border-black px-5 py-1 md:px-7 md:py-2">
-              <h1 className="font-semibold ">7 Desember 2023</h1>
+              <h1 className="font-semibold ">Klik disini!</h1>
             </div>
           </div>
 

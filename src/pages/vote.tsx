@@ -128,8 +128,8 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
       </h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
         <div
-          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 opacity-40 shadow-2xl hover:cursor-pointer hover:bg-[#a3b3e43f]"
-          // onClick={() => handleSetStep("verify")}
+          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800  shadow-2xl hover:cursor-pointer hover:bg-[#a3b3e43f]"
+          onClick={() => handleSetStep("verify")}
         >
           <h3 className="text-xl font-bold">Lanjutkan Untuk Voting →</h3>
           <div className="text-lg">
@@ -266,15 +266,23 @@ const candidateExample = [
   {
     name: "M. Gunawan Raditya",
     num: 1,
-    vision:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, iure?",
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2005-2011)",
+      ttl: "Palembang, 4 Desember 1986",
+      work: "Koordinator Pelaksana Internal SHG (PT. Solusi Energy Nusantara)",
+    },
+
     img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat1.png?alt=media&token=65b3c922-f056-4ea0-b044-c059b01f1ebc",
   },
   {
     name: "Hesekiel Sijabat",
     num: 2,
-    vision:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, iure?",
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (1994-2001)",
+      ttl: "Batusangkar, 19 Mei 1975",
+      work: "Kepala Kantor Pertahanan Kabupaten Cirebon BPN",
+    },
+
     img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
   },
 ];
@@ -333,8 +341,14 @@ const FormInputVoting = ({
                   <h1 className="z-30 text-center text-lg font-bold text-gray-900 md:mt-4 md:text-2xl">
                     {candidate.name}
                   </h1>
-                  <p className="z-30 mt-3 text-center  text-lg italic text-gray-900 md:text-xl">
-                    &quot;{candidate.vision}&quot;
+                  <p className="z-30 mt-3 text-sm  text-gray-900 md:text-sm">
+                    - {candidate.vision.pendidikan}
+                  </p>
+                  <p className="z-30  text-sm  text-gray-900 md:text-sm">
+                    - {candidate.vision.ttl}
+                  </p>
+                  <p className="z-30  text-sm  text-gray-900 md:text-sm">
+                    - {candidate.vision.work}
                   </p>
                 </div>
               </div>
