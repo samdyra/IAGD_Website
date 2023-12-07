@@ -151,7 +151,7 @@ export default function Home() {
 
       <div className="mt-20  sm:mb-32">
         <h2 className="tcs mx-auto max-w-[620px] pt-6 text-center text-2xl font-semibold sm:text-3xl">
-          Galeri Foto Pemilu IAGD
+          Galeri Foto IAGD
         </h2>
         <div className="container mx-auto  my-12 gap-4 sm:flex sm:justify-between">
           <Splide
@@ -514,7 +514,8 @@ const MilestoneElement: React.FC = () => {
             </div>
 
             <p
-              className={`text-s w-5/12 text-center  text-gray-900 sm:h-16 sm:w-full
+              className={`w-5/12 text-center text-xs  text-gray-900 sm:h-16 sm:w-full sm:text-sm
+              
             ${event.expired && "text-gray-300"}
             `}
             >
