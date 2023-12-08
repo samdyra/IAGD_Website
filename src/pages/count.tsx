@@ -57,7 +57,7 @@ const Count = () => {
 
   const tableData = [
     ["id", "phone number", "has voted", "voter token", "chose candidate"],
-    ...wholeData,
+    ...(wholeData as []),
   ];
 
   const tableOptions = {
