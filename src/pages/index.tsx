@@ -566,7 +566,7 @@ interface CardProps {
 const CardComponent: React.FC<CardProps> = ({ description, subheading }) => {
   return (
     <div className="bgp mx-auto my-10 w-5/6 max-w-6xl overflow-hidden rounded-lg p-8 text-white shadow-lg">
-      <p className="customScroll text-md  mb-4 h-[320px] overflow-y-scroll rounded-md   text-justify font-medium italic sm:text-lg">
+      <p className="customScroll text-md  mb-4 h-[320px] overflow-y-scroll rounded-md   text-left font-medium italic sm:text-lg">
         {paragraph1}
         <br></br>
         <br></br>
