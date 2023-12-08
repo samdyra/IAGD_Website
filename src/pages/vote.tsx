@@ -4,8 +4,6 @@ import { type Dispatch } from "react";
 import { type SetStateAction } from "react";
 import Link from "next/link";
 
-import Image from "next/image";
-
 import { api } from "~/utils/api";
 import { useState } from "react";
 import toast from "react-hot-toast";
