@@ -26,8 +26,28 @@
   @apply bg-[#2e3486];
 }
 
-::-webkit-scrollbar {
-  display: none;
+* {
+  scrollbar-width: 10px;
+  scrollbar-color: #6a6a6a #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0px;
+}
+
+.customScroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  /* background: #ffffff; */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 10px;
+  /* border: 2px solid #ffffff; */
 }
 
 .card-container {

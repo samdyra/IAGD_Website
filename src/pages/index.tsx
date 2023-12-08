@@ -5,6 +5,20 @@ import logo from "../../public/logo.png";
 import phone from "../../public/Phone.png";
 
 import Link from "next/link";
+import {
+  sambutan,
+  paragraph1,
+  paragraph10,
+  paragraph11,
+  paragraph2,
+  paragraph3,
+  paragraph4,
+  paragraph5,
+  paragraph6,
+  paragraph7,
+  paragraph8,
+  paragraph9,
+} from "~/utils/wordings";
 import { type StaticImageData } from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
@@ -89,7 +103,7 @@ export default function Home() {
       </div>
 
       <MilestoneElement />
-      {/* <div className="container mx-auto sm:mb-32">
+      <div className="container mx-auto sm:mb-32">
         <h2 className="tcs pt-8 text-center text-2xl font-semibold sm:text-3xl ">
           Sambutan Ketua Umum IAGD <br /> 2020-2023
         </h2>
@@ -99,7 +113,7 @@ export default function Home() {
           heading={cardData.heading}
           subheading={cardData.subheading}
         />
-      </div> */}
+      </div>
       <h2 className="tcs mx-auto max-w-[620px] px-4 pt-6 text-center text-2xl font-semibold sm:text-3xl">
         Daftar Calon Kandidat Ketua Umum IAGD 2023
       </h2>
@@ -552,12 +566,50 @@ interface CardProps {
 const CardComponent: React.FC<CardProps> = ({ description, subheading }) => {
   return (
     <div className="bgp mx-auto my-10 w-5/6 max-w-6xl overflow-hidden rounded-lg p-8 text-white shadow-lg">
-      <p className="mb-2 text-center text-lg sm:text-xl">{description}</p>
-      <div className="mx-auto my-8 w-fit rounded-md border-2 bg-white">
+      <p className="customScroll text-md  mb-4 h-[320px] overflow-y-scroll rounded-md   text-justify font-medium italic sm:text-lg">
+        {paragraph1}
+        <br></br>
+        <br></br>
+        {paragraph2}
+        <br></br>
+        <br></br>
+        {paragraph3}
+        <br></br>
+        <br></br>
+        {paragraph4}
+        <br></br>
+        <br></br>
+        {paragraph5}
+        <br></br>
+        <br></br>
+        {paragraph6}
+        <br></br>
+        <br></br>
+        {paragraph7}
+        <br></br>
+        <br></br>
+        {paragraph8}
+        <br></br>
+        <br></br>
+        {paragraph9}
+        <br></br>
+        <br></br>
+        {paragraph10}
+        <br></br>
+        <br></br>
+        {paragraph11}
+        Wassalamu’alaikum wr. wb.,
+        <br></br>
+        Viviani Suhar Ketua IAGD
+        <br></br>
+        Peridode 2020 - 2023
+      </p>
+      <div className="border-t-2 pt-4"></div>
+
+      <div className="mx-auto mb-2  w-fit rounded-md border-2 bg-white">
         <Image src={logo} width={113} alt="logo-iagd"></Image>
       </div>
-
-      <div className="mb-2 text-center text-xl font-bold sm:text-2xl">
+      <div className="text-center text-xl font-bold sm:text-2xl">
         Viviani Suhar
       </div>
       <p className="text-center text-lg ">{subheading}</p>
