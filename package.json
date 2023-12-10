@@ -33,6 +33,7 @@
     "react-query": "^3.39.3",
     "react-slick": "^0.29.0",
     "superjson": "^1.13.1",
+    "xlsx": "^0.18.5",
     "zod": "^3.21.4"
   },
   "devDependencies": {

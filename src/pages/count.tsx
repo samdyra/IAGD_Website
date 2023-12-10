@@ -1,6 +1,8 @@
 import React from "react";
 import { api } from "~/utils/api";
 import { Chart } from "react-google-charts";
+import { writeFile, utils } from "xlsx";
+import { useCallback } from "react";
 
 const Count = () => {
   const { data: countData, isLoading: isCountDataLoading } =
@@ -38,6 +40,19 @@ const Count = () => {
         },
       }
     );
+
+  // console.log(wholeData);
+  // const exportFile = useCallback(() => {
+  //   /* generate worksheet from state */
+  //   const ws = utils.json_to_sheet(wholeData);
+  //   /* create workbook and append worksheet */
+  //   const wb = utils.book_new();
+  //   utils.book_append_sheet(wb, ws, "Data");
+  //   /* export to XLSX */
+  //   writeFile(wb, "SheetJSReactAoO.xlsx");
+  // }, [wholeData]);
+
+  // exportFile();
 
   const isLoading = isCountDataLoading || isTableDataLoading;
 

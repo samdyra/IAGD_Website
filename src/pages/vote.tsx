@@ -126,8 +126,8 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
       </h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
         <div
-          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800  shadow-2xl hover:cursor-pointer hover:bg-[#a3b3e43f]"
-          onClick={() => handleSetStep("verify")}
+          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 opacity-20  shadow-2xl hover:cursor-pointer hover:bg-[#a3b3e43f]"
+          // onClick={() => handleSetStep("verify")}
         >
           <h3 className="text-xl font-bold">Lanjutkan Untuk Voting →</h3>
           <div className="text-lg">
