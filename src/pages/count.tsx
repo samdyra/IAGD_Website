@@ -92,6 +92,13 @@ const Count = () => {
           height={"500px"}
         />
       </div>
+      <h1 className="text-center text-2xl font-bold">Count Result</h1>
+      <h1 className="text-center font-bold">
+        candidate 1 voter: {countData?.countCandidateOne}
+      </h1>
+      <h1 className="text-center font-bold">
+        candidate 2 voter: {countData?.countCandidateTwo}
+      </h1>
 
       <div className="flex justify-center ">
         <Chart
