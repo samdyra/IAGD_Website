@@ -7,29 +7,30 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { AnimatePresence, motion } from "framer-motion";
 
-type Steps = "initial" | "verify" | "voting" | "success";
+type Steps = "initial" | "access" | "verify" | "voting" | "success";
+
 type HandleSetStep = (step: Steps) => void;
 
 const candidateExample = [
   {
-    name: "M. Gunawan Raditya",
+    name: "M. Rafi Ramadhan",
     num: 1,
     vision: {
-      pendidikan: "S1 Teknik Geodesi dan Geomatika (2005-2011)",
-      ttl: "Palembang, 4 Desember 1986",
-      work: "Koordinator Pelaksana Internal SHG (PT. Solusi Energy Nusantara)",
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2001-2011)",
+      ttl: "Bandung, 1 Januari 1926",
+      work: "Ketua Umum Ikatan Surveyor Bandung",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat1.png?alt=media&token=65b3c922-f056-4ea0-b044-c059b01f1ebc",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
   {
-    name: "Hesekiel Sijabat",
+    name: "M. Rizki Ramadhan",
     num: 2,
     vision: {
-      pendidikan: "S1 Teknik Geodesi dan Geomatika (1994-2001)",
-      ttl: "Batusangkar, 19 Mei 1975",
-      work: "Kepala Kantor Pertahanan Kabupaten Cirebon BPN",
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (1999-2001)",
+      ttl: "Wonosobo, 19 April 2000",
+      work: "Kepala Badan Informasi Geospasial",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
 ];
 
@@ -42,7 +43,7 @@ const viceHeadCandidates = [
       ttl: "Jakarta, 15 Agustus 1990",
       work: "Senior Surveyor at PT Geo Mapping Indonesia",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
   {
     name: "Budi Santoso",
@@ -52,7 +53,7 @@ const viceHeadCandidates = [
       ttl: "Surabaya, 22 Maret 1989",
       work: "GIS Specialist at Environmental Research Center",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
   {
     name: "Citra Dewi",
@@ -62,7 +63,7 @@ const viceHeadCandidates = [
       ttl: "Bandung, 7 Juli 1991",
       work: "Remote Sensing Analyst at National Space Agency",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
   {
     name: "Dian Pratama",
@@ -72,7 +73,7 @@ const viceHeadCandidates = [
       ttl: "Medan, 30 November 1988",
       work: "Project Manager at PT Geospatial Solutions",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
   {
     name: "Eko Widodo",
@@ -82,7 +83,7 @@ const viceHeadCandidates = [
       ttl: "Semarang, 12 April 1992",
       work: "Geomatics Engineer at Ministry of Public Works",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
   {
     name: "Fira Rahmawati",
@@ -92,7 +93,7 @@ const viceHeadCandidates = [
       ttl: "Yogyakarta, 25 September 1993",
       work: "Cadastral Surveyor at National Land Agency",
     },
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+    img: "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png",
   },
 ];
 
@@ -147,6 +148,7 @@ export default function Vote() {
   const currentPage = (step: Steps) => {
     const availablePage: Record<Steps, React.ReactNode> = {
       initial: <WelcomingPage handleSetStep={handleSetStep} />,
+      access: <AccessTokenVerification handleSetStep={handleSetStep} />,
       verify: (
         <FormInputValidation
           handleSetStep={handleSetStep}
@@ -215,14 +217,14 @@ type WelcomingProps = {
 const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
   <>
     <div className="container flex flex-col items-center justify-center px-4 py-5">
-      <h1 className="mb-8 max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
+      <h1 className="mb-12 max-w-4xl text-center text-5xl font-extrabold leading-tight tracking-tight text-gray-800	drop-shadow-2xl sm:text-[5rem]">
         Halo! Selamat Datang ke
-        <span className="text-[#EA7227]"> Pemilu IAGD</span>
+        <span className="text-[#EA7227]"> Pemilu ISI</span>
       </h1>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+      <div className=" md:gap-8">
         <div
           className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:cursor-pointer hover:bg-[#a3b3e43f]"
-          onClick={() => handleSetStep("verify")}
+          onClick={() => handleSetStep("access")}
         >
           <h3 className="text-xl font-bold">Lanjutkan Untuk Voting →</h3>
           <div className="text-lg">
@@ -230,7 +232,7 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
             melanjutkan
           </div>
         </div>
-        <Link
+        {/* <Link
           className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#EA7227] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl  hover:bg-[#a3b3e43f]"
           href="/"
           target="_blank"
@@ -240,11 +242,58 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
             Pelajari masing-masing kandidat, agar kalian semakin yakin memilih
             kandidat yang anda inginkan!
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   </>
 );
+
+type AccessTokenProps = {
+  handleSetStep: HandleSetStep;
+};
+
+const AccessTokenVerification = ({ handleSetStep }: AccessTokenProps) => {
+  const [accessToken, setAccessToken] = useState("");
+
+  const handleAccessTokenChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setAccessToken(event.target.value);
+  };
+
+  const handleVerifyAccessToken = () => {
+    // Replace this with your actual access token verification logic
+    if (accessToken === "123abc") {
+      toast.success("Access token verified!");
+      handleSetStep("verify");
+    } else {
+      toast.error("Invalid access token. Please try again.");
+    }
+  };
+
+  return (
+    <div className="w-screen">
+      <div className="mx-auto max-w-[520px] px-6 sm:w-[620px] md:w-[620px] lg:max-w-[920px]">
+        <h2 className="mb-6 text-2xl font-bold text-gray-900 md:mb-8 md:text-3xl lg:text-4xl">
+          Enter Access Token
+        </h2>
+        <input
+          type="text"
+          value={accessToken}
+          onChange={handleAccessTokenChange}
+          className="mb-4 w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          placeholder="Enter access token"
+        />
+        <button
+          onClick={handleVerifyAccessToken}
+          className="w-full rounded-lg bg-[#EA7227] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#d86522] focus:outline-none focus:ring-4 focus:ring-blue-300"
+        >
+          Verify Access Token
+        </button>
+      </div>
+    </div>
+  );
+};
 
 type ValidationProps = {
   handleSetStep: HandleSetStep;
@@ -401,15 +450,10 @@ const FormInputVoting = ({
           Vote <span className="text-[#EA7227]">Head and Vice Head</span>{" "}
           Candidates!
         </h1>
-        <div className="mx-auto mb-4 w-56 cursor-pointer rounded-lg border-2 border-[#EA7227] bg-[#d2daf43f] p-2 shadow-2xl hover:bg-[#a3b3e43f]">
-          <Link href={"/"}>
-            <h1 className="text-center  text-sm font-semibold text-gray-800">
-              Not sure? Click here to learn more about the candidates
-            </h1>
-          </Link>
-        </div>
 
-        <h2 className="mt-8 text-center text-2xl font-bold">Head Candidates</h2>
+        <h2 className="mb-8 mt-8 text-center text-2xl font-bold">
+          Head Candidates
+        </h2>
         <div className="mt-4 md:flex md:gap-8 lg:gap-16">
           {candidateExample.map((candidate, idx) => {
             const isSelected = candidate.num === selectedHeadNum;
