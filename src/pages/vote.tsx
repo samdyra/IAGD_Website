@@ -1,11 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
-import { type Dispatch } from "react";
-import { type SetStateAction } from "react";
+import React, { useState, type Dispatch, type SetStateAction } from "react";
 import Link from "next/link";
-
 import { api } from "~/utils/api";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -14,20 +10,107 @@ import { AnimatePresence, motion } from "framer-motion";
 type Steps = "initial" | "verify" | "voting" | "success";
 type HandleSetStep = (step: Steps) => void;
 
+const candidateExample = [
+  {
+    name: "M. Gunawan Raditya",
+    num: 1,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2005-2011)",
+      ttl: "Palembang, 4 Desember 1986",
+      work: "Koordinator Pelaksana Internal SHG (PT. Solusi Energy Nusantara)",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat1.png?alt=media&token=65b3c922-f056-4ea0-b044-c059b01f1ebc",
+  },
+  {
+    name: "Hesekiel Sijabat",
+    num: 2,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (1994-2001)",
+      ttl: "Batusangkar, 19 Mei 1975",
+      work: "Kepala Kantor Pertahanan Kabupaten Cirebon BPN",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+  },
+];
+
+const viceHeadCandidates = [
+  {
+    name: "Anisa Putri",
+    num: 1,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2008-2013)",
+      ttl: "Jakarta, 15 Agustus 1990",
+      work: "Senior Surveyor at PT Geo Mapping Indonesia",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+  },
+  {
+    name: "Budi Santoso",
+    num: 2,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2007-2012)",
+      ttl: "Surabaya, 22 Maret 1989",
+      work: "GIS Specialist at Environmental Research Center",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+  },
+  {
+    name: "Citra Dewi",
+    num: 3,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2009-2014)",
+      ttl: "Bandung, 7 Juli 1991",
+      work: "Remote Sensing Analyst at National Space Agency",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+  },
+  {
+    name: "Dian Pratama",
+    num: 4,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2006-2011)",
+      ttl: "Medan, 30 November 1988",
+      work: "Project Manager at PT Geospatial Solutions",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+  },
+  {
+    name: "Eko Widodo",
+    num: 5,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2010-2015)",
+      ttl: "Semarang, 12 April 1992",
+      work: "Geomatics Engineer at Ministry of Public Works",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+  },
+  {
+    name: "Fira Rahmawati",
+    num: 6,
+    vision: {
+      pendidikan: "S1 Teknik Geodesi dan Geomatika (2011-2016)",
+      ttl: "Yogyakarta, 25 September 1993",
+      work: "Cadastral Surveyor at National Land Agency",
+    },
+    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
+  },
+];
+
 export default function Vote() {
   const [step, setStep] = useState<Steps>("initial");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectNum, setSelectNum] = useState(0);
-  const voter = useState("");
-  const phone = useState("");
-
-  const voterToken = voter[0];
-  const phoneNumber = phone[0];
+  const [selectedHeadNum, setSelectedHeadNum] = useState(0);
+  const [selectedViceHeadNums, setSelectedViceHeadNums] = useState<number[]>(
+    []
+  );
+  const [voterToken, setVoterToken] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const { mutateAsync: vote } = api.vote.vote.useMutation({
     onSuccess: () => {
       toast.success("Anda berhasil memvote!");
       setIsModalVisible(false);
+      setStep("success");
     },
     onError: (err) => {
       toast.error(err.message);
@@ -36,8 +119,12 @@ export default function Vote() {
 
   const handleSetStep = (step: Steps) => setStep(step);
 
-  const handleSelectNum = (numCandidate: number) => {
-    setSelectNum(numCandidate);
+  const handleSelectHead = (num: number) => {
+    setSelectedHeadNum(num);
+  };
+
+  const handleSelectViceHeads = (nums: number[]) => {
+    setSelectedViceHeadNums(nums);
   };
 
   const handleToggleModal = () => {
@@ -46,8 +133,12 @@ export default function Vote() {
 
   const handleVoteCandidate = async () => {
     try {
-      await vote({ voteNumber: selectNum, voterToken, phoneNumber });
-      setStep("success");
+      await vote({
+        headCandidateNum: selectedHeadNum,
+        viceHeadCandidateNums: selectedViceHeadNums,
+        voterToken,
+        phoneNumber,
+      });
     } catch {
       toast.error("Something Went Wrong!");
     }
@@ -59,14 +150,16 @@ export default function Vote() {
       verify: (
         <FormInputValidation
           handleSetStep={handleSetStep}
-          phone={phone}
-          voter={voter}
+          setPhoneNumber={setPhoneNumber}
+          setVoterToken={setVoterToken}
         />
       ),
       voting: (
         <FormInputVoting
-          handleSelectNum={handleSelectNum}
-          selectNum={selectNum}
+          handleSelectHead={handleSelectHead}
+          handleSelectViceHeads={handleSelectViceHeads}
+          selectedHeadNum={selectedHeadNum}
+          selectedViceHeadNums={selectedViceHeadNums}
           handleToggleModal={handleToggleModal}
         />
       ),
@@ -74,7 +167,8 @@ export default function Vote() {
         <SuccessScreen
           phoneNumber={phoneNumber}
           voterToken={voterToken}
-          voteNum={selectNum}
+          headVoteNum={selectedHeadNum}
+          viceHeadVoteNums={selectedViceHeadNums}
         />
       ),
     };
@@ -83,7 +177,7 @@ export default function Vote() {
   };
 
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>IAGD ITB</title>
         <meta name="IAGD'S Website" content="Website Voting IAGD" />
@@ -93,7 +187,8 @@ export default function Vote() {
         handleHideModal={handleToggleModal}
         isModalVisible={isModalVisible}
         callback={handleVoteCandidate}
-        chosenNum={selectNum}
+        chosenHeadNum={selectedHeadNum}
+        chosenViceHeadNums={selectedViceHeadNums}
       />
       <div className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-indigo-100 via-[#b6bfcb] to-white">
         <main className="flex min-h-screen flex-col items-center justify-center bg-opacity-20 bg-[url('../../public/gridbg.png')]">
@@ -109,7 +204,7 @@ export default function Vote() {
           </AnimatePresence>
         </main>
       </div>
-    </>
+    </React.Fragment>
   );
 }
 
@@ -126,8 +221,8 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
       </h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
         <div
-          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 opacity-20  shadow-2xl hover:cursor-pointer hover:bg-[#a3b3e43f]"
-          // onClick={() => handleSetStep("verify")}
+          className="flex max-w-xs flex-col gap-4 rounded-xl border-2 border-[#575757] bg-[#d2daf43f] p-4 text-gray-800 shadow-2xl hover:cursor-pointer hover:bg-[#a3b3e43f]"
+          onClick={() => handleSetStep("verify")}
         >
           <h3 className="text-xl font-bold">Lanjutkan Untuk Voting →</h3>
           <div className="text-lg">
@@ -153,47 +248,47 @@ const WelcomingPage = ({ handleSetStep }: WelcomingProps) => (
 
 type ValidationProps = {
   handleSetStep: HandleSetStep;
-  voter: [string, Dispatch<SetStateAction<string>>];
-  phone: [string, Dispatch<SetStateAction<string>>];
+  setPhoneNumber: Dispatch<SetStateAction<string>>;
+  setVoterToken: Dispatch<SetStateAction<string>>;
 };
 
 const FormInputValidation = ({
   handleSetStep,
-  phone,
-  voter,
+  setPhoneNumber,
+  setVoterToken,
 }: ValidationProps) => {
   const [isChecked, setIsChecked] = useState(false);
+  const [localPhoneNumber, setLocalPhoneNumber] = useState("");
+  const [localVoterToken, setLocalVoterToken] = useState("");
 
-  const [voterToken, setVoterToken] = voter;
-  const [phoneNumber, setPhoneNumber] = phone;
-
-  const isFormInvalid = voterToken === "" || !phoneNumber;
+  const isFormInvalid = localVoterToken === "" || !localPhoneNumber;
 
   const { mutate, isLoading: isLoadingVerify } =
     api.vote.validateVoterToken.useMutation({
       onSuccess: () => {
         toast.success("Welcome!");
+        setPhoneNumber(localPhoneNumber);
+        setVoterToken(localVoterToken);
         handleSetStep("voting");
       },
       onError: (err) => {
-        setPhoneNumber("");
-        setVoterToken("");
+        setLocalPhoneNumber("");
+        setLocalVoterToken("");
         toast.error(err.message);
       },
     });
 
   const handleClickVerify = () => {
     setIsChecked(false);
-
-    mutate({ voterToken, phoneNumber });
+    mutate({ voterToken: localVoterToken, phoneNumber: localPhoneNumber });
   };
 
   const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setVoterToken(event.currentTarget.value);
+    setLocalVoterToken(event.currentTarget.value);
   };
 
   const handlePhoneNumberChange = (phoneNumber: string) => {
-    setPhoneNumber(phoneNumber);
+    setLocalPhoneNumber(phoneNumber);
   };
 
   const handleCheckboxChange = () => {
@@ -211,7 +306,7 @@ const FormInputValidation = ({
           Nomor Telepon
         </label>
         <PhoneInput
-          value={phoneNumber}
+          value={localPhoneNumber}
           onChange={handlePhoneNumberChange}
           className="text-md mb-4 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
           defaultCountry="ID"
@@ -223,7 +318,7 @@ const FormInputValidation = ({
         </label>
         <input
           onChange={handleTokenChange}
-          value={voterToken}
+          value={localVoterToken}
           className="text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
           placeholder="voter token"
           type="password"
@@ -260,64 +355,69 @@ const FormInputValidation = ({
   );
 };
 
-const candidateExample = [
-  {
-    name: "M. Gunawan Raditya",
-    num: 1,
-    vision: {
-      pendidikan: "S1 Teknik Geodesi dan Geomatika (2005-2011)",
-      ttl: "Palembang, 4 Desember 1986",
-      work: "Koordinator Pelaksana Internal SHG (PT. Solusi Energy Nusantara)",
-    },
-
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat1.png?alt=media&token=65b3c922-f056-4ea0-b044-c059b01f1ebc",
-  },
-  {
-    name: "Hesekiel Sijabat",
-    num: 2,
-    vision: {
-      pendidikan: "S1 Teknik Geodesi dan Geomatika (1994-2001)",
-      ttl: "Batusangkar, 19 Mei 1975",
-      work: "Kepala Kantor Pertahanan Kabupaten Cirebon BPN",
-    },
-
-    img: "https://firebasestorage.googleapis.com/v0/b/tugasakhir-6cc8d.appspot.com/o/kandidat2.png?alt=media&token=6aec5bf0-2475-4213-bc2d-260c23b981fe",
-  },
-];
-
 type FormProps = {
   handleToggleModal?: () => void;
-  handleSelectNum: (num: number) => void;
-  selectNum: number;
+  handleSelectHead: (num: number) => void;
+  handleSelectViceHeads: (nums: number[]) => void;
+  selectedHeadNum: number;
+  selectedViceHeadNums: number[];
 };
 
 const FormInputVoting = ({
   handleToggleModal,
-  handleSelectNum,
-  selectNum,
+  handleSelectHead,
+  handleSelectViceHeads,
+  selectedHeadNum,
+  selectedViceHeadNums,
 }: FormProps) => {
+  const [tempSelectedViceHeads, setTempSelectedViceHeads] =
+    useState<number[]>(selectedViceHeadNums);
+
+  const handleViceHeadSelection = (num: number) => {
+    if (tempSelectedViceHeads.includes(num)) {
+      setTempSelectedViceHeads(tempSelectedViceHeads.filter((n) => n !== num));
+    } else if (tempSelectedViceHeads.length < 4) {
+      setTempSelectedViceHeads([...tempSelectedViceHeads, num]);
+    } else {
+      toast.error("You can only select 4 vice head candidates");
+    }
+  };
+
+  const handleConfirmSelection = () => {
+    if (selectedHeadNum === 0) {
+      toast.error("Please select a head candidate");
+    } else if (tempSelectedViceHeads.length !== 4) {
+      toast.error("Please select exactly 4 vice head candidates");
+    } else {
+      handleSelectViceHeads(tempSelectedViceHeads);
+      handleToggleModal?.();
+    }
+  };
+
   return (
     <>
       <div className="mb-36 mt-16 md:mt-8 lg:mt-16">
         <h1 className="mb-4 px-4 text-center text-3xl font-bold text-gray-800 md:text-4xl">
-          Vote <span className="text-[#EA7227]">Kandidat</span> Pilihanmu!
+          Vote <span className="text-[#EA7227]">Head and Vice Head</span>{" "}
+          Candidates!
         </h1>
         <div className="mx-auto mb-4 w-56 cursor-pointer rounded-lg border-2 border-[#EA7227] bg-[#d2daf43f] p-2 shadow-2xl hover:bg-[#a3b3e43f]">
           <Link href={"/"}>
             <h1 className="text-center  text-sm font-semibold text-gray-800">
-              Belum yakin? Klik disini untuk mempelajari para kandidat
+              Not sure? Click here to learn more about the candidates
             </h1>
           </Link>
         </div>
-        <div className="mt-8 md:flex md:gap-8 lg:gap-16">
-          {candidateExample.map((candidate, idx) => {
-            const isSelected = candidate.num === selectNum;
 
+        <h2 className="mt-8 text-center text-2xl font-bold">Head Candidates</h2>
+        <div className="mt-4 md:flex md:gap-8 lg:gap-16">
+          {candidateExample.map((candidate, idx) => {
+            const isSelected = candidate.num === selectedHeadNum;
             return (
               <div
                 className="mx-auto mb-6 aspect-[3/4] h-[420px] cursor-pointer rounded-3xl border-2 border-black bg-[#EA7227] p-5 text-gray-800 hover:opacity-80 md:h-[450px]"
                 key={idx}
-                onClick={() => handleSelectNum(candidate.num)}
+                onClick={() => handleSelectHead(candidate.num)}
               >
                 <div className="absolute h-12 w-12 rounded-full border-4 border-black bg-white">
                   {isSelected && (
@@ -326,6 +426,7 @@ const FormInputVoting = ({
                     </h1>
                   )}
                 </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={candidate.img}
                   alt="Profile Badge"
@@ -353,20 +454,69 @@ const FormInputVoting = ({
             );
           })}
         </div>
+
+        <h2 className="mt-8 text-center text-2xl font-bold">
+          Vice Head Candidates
+        </h2>
+        <p className="mt-2 text-center">Select 4 candidates</p>
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+          {viceHeadCandidates.map((candidate, idx) => {
+            const isSelected = tempSelectedViceHeads.includes(candidate.num);
+            return (
+              <div
+                className={`relative mx-auto mb-6 aspect-[3/4] h-[300px] cursor-pointer rounded-3xl border-2 p-3 text-gray-800 hover:opacity-80 ${"border-black bg-[#EA7227]"}`}
+                key={idx}
+                onClick={() => handleViceHeadSelection(candidate.num)}
+              >
+                {/* <div className="absolute right-2 top-2 h-8 w-8 rounded-full bg-white"> */}
+                <div className="absolute left-4 top-4 h-9 w-9 rounded-full border-4 border-black bg-white">
+                  {isSelected && (
+                    <h1 className="text-center text-xl font-bold text-green-700">
+                      ✓
+                    </h1>
+                  )}
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={candidate.img}
+                  alt="Profile Badge"
+                  title="Profile Badge"
+                  className="relative z-10 mx-auto mt-2 h-[100px] w-[100px] overflow-hidden rounded-full border-2 object-cover"
+                />
+                <div className="relative -top-[20px] h-[180px] w-full rounded-lg border-gray-800 bg-white px-3 pt-6 shadow-md backdrop-blur-md">
+                  <h1 className="z-30 text-center text-sm font-bold text-gray-900">
+                    {candidate.name}
+                  </h1>
+                  <p className="z-30 mt-2 text-xs text-gray-900">
+                    {candidate.vision.pendidikan}
+                  </p>
+                  <p className="z-30 text-xs text-gray-900">
+                    {candidate.vision.ttl}
+                  </p>
+                  <p className="z-30 text-xs text-gray-900">
+                    {candidate.vision.work}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 z-40 h-16 w-full  bg-white/30 shadow-md backdrop-blur-md" />
       <div
-        className="fixed inset-x-0 bottom-8 z-40 mx-auto h-16 w-60 cursor-pointer rounded-lg bg-[#2e3486] hover:opacity-80"
-        onClick={
-          selectNum !== 0
-            ? handleToggleModal
-            : () => toast.error("Pilih Kandidat terlebih dahulu")
-        }
+        className="fixed inset-x-0 bottom-4 z-50 mx-auto h-14 w-80 cursor-pointer rounded-lg bg-[#2e3486] hover:bg-blue-400 sm:bottom-8 sm:h-16 sm:w-80"
+        onClick={handleConfirmSelection}
       >
-        <h1 className="mt-4 text-center text-lg font-bold text-white">
-          {selectNum === 0
-            ? "Klik salah satu kandidat"
-            : `Konfirmasi Pilih Nomor ${selectNum}`}
+        <h1 className="mt-4 text-center text-base font-bold text-white sm:mt-4 sm:text-lg">
+          {selectedHeadNum === 0
+            ? "Select head candidate"
+            : tempSelectedViceHeads.length !== 4
+            ? `Select ${
+                4 - tempSelectedViceHeads.length
+              } more vice head candidate${
+                4 - tempSelectedViceHeads.length === 1 ? "" : "s"
+              }`
+            : "Confirm Selection"}
         </h1>
       </div>
     </>
@@ -377,12 +527,14 @@ interface IProps {
   isModalVisible: boolean;
   handleHideModal: () => void;
   callback: () => Promise<void>;
-  chosenNum: number;
+  chosenHeadNum: number;
+  chosenViceHeadNums: number[];
 }
 
 function Modal({
   callback,
-  chosenNum,
+  chosenHeadNum,
+  chosenViceHeadNums,
   handleHideModal,
   isModalVisible,
 }: IProps) {
@@ -425,7 +577,13 @@ function Modal({
 
               <div className="space-y-6 p-6">
                 <p className="text-xl font-bold leading-relaxed text-gray-900">
-                  Anda Memilih Kandidat Nomor {chosenNum}
+                  Anda Memilih:
+                </p>
+                <p className="text-md font-medium leading-relaxed text-gray-900">
+                  Head Candidate: Nomor {chosenHeadNum}
+                </p>
+                <p className="text-md font-medium leading-relaxed text-gray-900">
+                  Vice Head Candidates: Nomor {chosenViceHeadNums.join(", ")}
                 </p>
                 <p className="text-md font-medium leading-relaxed text-gray-900">
                   Keputusan ini tidak bisa diulang, pastikan anda sudah memilih
@@ -460,28 +618,31 @@ function Modal({
   );
 }
 
-type Props = {
+type SuccessScreenProps = {
   phoneNumber: string;
   voterToken: string;
-  voteNum: number;
+  headVoteNum: number;
+  viceHeadVoteNums: number[];
 };
 
 function hideStringExceptLast3Digits(input: string): string {
   if (input.length < 3) {
-    // If the input string is shorter than 3 characters, return it as is.
     return input;
   }
-
-  const last3Digits = input.slice(-3); // Get the last 3 characters
-  const hiddenPart = "*".repeat(input.length - 3); // Create a string of asterisks
-
+  const last3Digits = input.slice(-3);
+  const hiddenPart = "*".repeat(input.length - 3);
   return hiddenPart + last3Digits;
 }
 
 const shareText =
   "Yuk, jangan lupa untuk menggunakan hak suaranya ya dalam Pemilu IAGD 2023. Berikan suaramu untuk menciptakan perubahan positif bersama-sama! https://www.iagd-itb.com/ ";
 
-const SuccessScreen = ({ phoneNumber, voterToken, voteNum }: Props) => {
+const SuccessScreen = ({
+  phoneNumber,
+  voterToken,
+  headVoteNum,
+  viceHeadVoteNums,
+}: SuccessScreenProps) => {
   return (
     <div className="bgp h-screen  w-screen overflow-scroll pb-24">
       <h1 className="pt-16 text-center text-4xl font-semibold text-white">
@@ -508,8 +669,14 @@ const SuccessScreen = ({ phoneNumber, voterToken, voteNum }: Props) => {
         </svg>
 
         <h1 className="pt-24 text-center text-2xl font-semibold text-white">
-          Kamu telah berhasil memilih <br></br>Calon Nomor {voteNum}
+          Kamu telah berhasil memilih:
         </h1>
+        <p className="mt-4 text-center text-xl text-white">
+          Calon Ketua Nomor {headVoteNum}
+        </p>
+        <p className="mt-2 text-center text-xl text-white">
+          Calon Wakil Ketua Nomor {viceHeadVoteNums.join(", ")}
+        </p>
         <div className="mt-12 flex justify-between px-8">
           <p className="w-fit text-lg  text-white">Notelp Pemilih</p>
           <p className="w-fit text-lg  text-white">
@@ -553,7 +720,7 @@ const WhatsappIcon = () => (
     viewBox="0 0 48 48"
     width="40px"
     height="40px"
-    clip-rule="evenodd"
+    clipRule="evenodd"
   >
     <path
       fill="#fff"
@@ -573,9 +740,9 @@ const WhatsappIcon = () => (
     />
     <path
       fill="#fff"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M19.268,16.045c-0.355-0.79-0.729-0.806-1.068-0.82c-0.277-0.012-0.593-0.011-0.909-0.011c-0.316,0-0.83,0.119-1.265,0.594c-0.435,0.475-1.661,1.622-1.661,3.956c0,2.334,1.7,4.59,1.937,4.906c0.237,0.316,3.282,5.259,8.104,7.161c4.007,1.58,4.823,1.266,5.693,1.187c0.87-0.079,2.807-1.147,3.202-2.255c0.395-1.108,0.395-2.057,0.277-2.255c-0.119-0.198-0.435-0.316-0.909-0.554s-2.807-1.385-3.242-1.543c-0.435-0.158-0.751-0.237-1.068,0.238c-0.316,0.474-1.225,1.543-1.502,1.859c-0.277,0.317-0.554,0.357-1.028,0.119c-0.474-0.238-2.002-0.738-3.815-2.354c-1.41-1.257-2.362-2.81-2.639-3.285c-0.277-0.474-0.03-0.731,0.208-0.968c0.213-0.213,0.474-0.554,0.712-0.831c0.237-0.277,0.316-0.475,0.474-0.791c0.158-0.317,0.079-0.594-0.04-0.831C20.612,19.329,19.69,16.983,19.268,16.045z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
   </svg>
 );

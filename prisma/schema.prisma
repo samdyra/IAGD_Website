@@ -1,14 +1,13 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// This is your updated Prisma schema file
 
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
-    relationMode = "prisma"
+  provider = "postgresql"
+  url   = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Voter {
@@ -18,5 +17,6 @@ model Voter {
     voterToken String @db.VarChar(255) @unique
     phoneNumber String @db.VarChar(255) @unique
     hasVoted Boolean @default(false)
-    choseCandidateNum Int 
+    choseHeadCandidateNum Int?
+    choseViceHeadCandidateNums Int[] @default([])
 }

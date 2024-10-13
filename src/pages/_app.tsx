@@ -1,5 +1,5 @@
 import { type AppType } from "next/app";
-import { ClerkProvider } from "@clerk/nextjs";
+// import { ClerkProvider } from "@clerk/nextjs";
 import { api } from "~/utils/api";
 import { Toaster } from "react-hot-toast";
 import "~/styles/globals.css";
@@ -11,15 +11,15 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ClerkProvider {...pageProps}>
-        <Head>
-          <title>Template</title>
-          <meta name="IAGD'S Website" content="Website Pemilu IAGD" />
-          <link rel="icon" href="../../public/logomini.png" />
-        </Head>
-        <Toaster position="top-center" />
-        <Component {...pageProps} />
-      </ClerkProvider>
+      {/* <ClerkProvider {...pageProps}> */}
+      <Head>
+        <title>Template</title>
+        <meta name="IAGD'S Website" content="Website Pemilu IAGD" />
+        <link rel="icon" href="../../public/logomini.png" />
+      </Head>
+      <Toaster position="top-center" />
+      <Component {...pageProps} />
+      {/* </ClerkProvider> */}
     </QueryClientProvider>
   );
 };

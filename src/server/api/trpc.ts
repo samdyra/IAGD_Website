@@ -26,16 +26,16 @@ import { prisma } from "~/server/db";
  */
 export const createTRPCContext = (opts: CreateNextContextOptions) => {
   const { req } = opts;
-  const sesh = getAuth(req);
+  // const sesh = getAuth(req);
   const ipAddress =
     (req.headers["x-forwarded-for"] as string | undefined) ??
     req.socket.remoteAddress;
 
-  const userId = sesh.userId;
+  // const userId = sesh.userId;
 
   return {
     prisma,
-    userId: userId,
+    // userId: userId,
     ipAddress,
   };
 };
@@ -50,7 +50,7 @@ export const createTRPCContext = (opts: CreateNextContextOptions) => {
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { getAuth } from "@clerk/nextjs/server";
+// import { getAuth } from "@clerk/nextjs/server";
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
@@ -89,11 +89,11 @@ export const createTRPCRouter = t.router;
  */
 export const publicProcedure = t.procedure;
 
-const enforceUserIsAuthed = t.middleware(async ({ ctx, next }) => {
-  if (!ctx.userId) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
-  }
-  return next({ ctx: { userId: ctx.userId, ipAddress: ctx.ipAddress } });
-});
+// const enforceUserIsAuthed = t.middleware(async ({ ctx, next }) => {
+//   if (!ctx.userId) {
+//     throw new TRPCError({ code: "UNAUTHORIZED" });
+//   }
+//   return next({ ctx: { userId: ctx.userId, ipAddress: ctx.ipAddress } });
+// });
 
-export const privateProcedure = t.procedure.use(enforceUserIsAuthed);
+// export const privateProcedure = t.procedure.use(enforceUserIsAuthed);

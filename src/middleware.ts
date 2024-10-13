@@ -1,7 +1,7 @@
-import { withClerkMiddleware } from "@clerk/nextjs/server";
+// import { withClerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export default withClerkMiddleware(() => NextResponse.next());
+export default () => NextResponse.next();
 
 // Stop Middleware running on static files
 export const config = {
