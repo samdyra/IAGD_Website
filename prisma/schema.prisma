@@ -1,22 +1,20 @@
-// This is your updated Prisma schema file
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url   = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model Voter {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    voterToken String @db.VarChar(255) @unique
-    phoneNumber String @db.VarChar(255) @unique
-    hasVoted Boolean @default(false)
-    choseHeadCandidateNum Int?
-    choseViceHeadCandidateNums Int[] @default([])
+  id                       String   @id @default(cuid())
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+  voterToken               String   @unique @db.VarChar(255)
+  phoneNumber              String   @unique @db.VarChar(255)
+  hasVoted                 Boolean  @default(false)
+  choseHeadCandidateNum    Int?
+  choseViceHeadCandidateNum Int?
 }

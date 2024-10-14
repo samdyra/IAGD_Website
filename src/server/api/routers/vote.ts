@@ -8,19 +8,15 @@ export const voteRouter = createTRPCRouter({
       const voter = await ctx.prisma.voter.findUnique({
         where: { phoneNumber: input.phoneNumber },
       });
-
       if (!voter) {
         throw new Error("Phone number not found!");
       }
-
       if (voter.voterToken !== input.voterToken) {
         throw new Error("Token not match, please check your token again!");
       }
-
       if (voter.hasVoted) {
         throw new Error("You have already voted!");
       }
-
       return {
         isVoterExist: Boolean(voter),
         isVoterHasVoted: voter.hasVoted,
@@ -32,7 +28,7 @@ export const voteRouter = createTRPCRouter({
       z.object({
         voterToken: z.string(),
         headCandidateNum: z.number().int(),
-        viceHeadCandidateNums: z.array(z.number().int()).length(4),
+        viceHeadCandidateNum: z.number().int(),
         phoneNumber: z.string(),
       })
     )
@@ -40,28 +36,23 @@ export const voteRouter = createTRPCRouter({
       const voter = await ctx.prisma.voter.findUnique({
         where: { phoneNumber: input.phoneNumber },
       });
-
       if (!voter) {
         throw new Error("Voter phone number not found!");
       }
-
       if (voter.voterToken !== input.voterToken) {
         throw new Error("Token not match");
       }
-
       if (voter.hasVoted) {
         throw new Error("You have already voted!");
       }
-
       const updatedVoter = await ctx.prisma.voter.update({
         where: { id: voter.id },
         data: {
           hasVoted: true,
           choseHeadCandidateNum: input.headCandidateNum,
-          choseViceHeadCandidateNums: input.viceHeadCandidateNums,
+          choseViceHeadCandidateNum: input.viceHeadCandidateNum,
         },
       });
-
       return { voter: updatedVoter };
     }),
 });

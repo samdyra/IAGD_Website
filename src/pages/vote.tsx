@@ -101,9 +101,7 @@ export default function Vote() {
   const [step, setStep] = useState<Steps>("initial");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedHeadNum, setSelectedHeadNum] = useState(0);
-  const [selectedViceHeadNums, setSelectedViceHeadNums] = useState<number[]>(
-    []
-  );
+  const [selectedViceHeadNum, setSelectedViceHeadNum] = useState<number>(0);
   const [voterToken, setVoterToken] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
@@ -124,8 +122,8 @@ export default function Vote() {
     setSelectedHeadNum(num);
   };
 
-  const handleSelectViceHeads = (nums: number[]) => {
-    setSelectedViceHeadNums(nums);
+  const handleSelectViceHead = (num: number) => {
+    setSelectedViceHeadNum(num);
   };
 
   const handleToggleModal = () => {
@@ -136,7 +134,7 @@ export default function Vote() {
     try {
       await vote({
         headCandidateNum: selectedHeadNum,
-        viceHeadCandidateNums: selectedViceHeadNums,
+        viceHeadCandidateNum: selectedViceHeadNum,
         voterToken,
         phoneNumber,
       });
@@ -159,9 +157,9 @@ export default function Vote() {
       voting: (
         <FormInputVoting
           handleSelectHead={handleSelectHead}
-          handleSelectViceHeads={handleSelectViceHeads}
+          handleSelectViceHead={handleSelectViceHead}
           selectedHeadNum={selectedHeadNum}
-          selectedViceHeadNums={selectedViceHeadNums}
+          selectedViceHeadNum={selectedViceHeadNum}
           handleToggleModal={handleToggleModal}
         />
       ),
@@ -170,7 +168,7 @@ export default function Vote() {
           phoneNumber={phoneNumber}
           voterToken={voterToken}
           headVoteNum={selectedHeadNum}
-          viceHeadVoteNums={selectedViceHeadNums}
+          viceHeadVoteNum={selectedViceHeadNum}
         />
       ),
     };
@@ -181,16 +179,16 @@ export default function Vote() {
   return (
     <React.Fragment>
       <Head>
-        <title>IAGD ITB</title>
-        <meta name="IAGD'S Website" content="Website Voting IAGD" />
-        <link rel="icon" href="logomini.png" />
+        <title>ISI</title>
+        <meta name="ISI'S Website" content="Website Voting ISI" />
+        <link rel="icon" />
       </Head>
       <Modal
         handleHideModal={handleToggleModal}
         isModalVisible={isModalVisible}
         callback={handleVoteCandidate}
         chosenHeadNum={selectedHeadNum}
-        chosenViceHeadNums={selectedViceHeadNums}
+        chosenViceHeadNum={selectedViceHeadNum}
       />
       <div className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-indigo-100 via-[#b6bfcb] to-white">
         <main className="flex min-h-screen flex-col items-center justify-center bg-opacity-20 bg-[url('../../public/gridbg.png')]">
@@ -407,38 +405,36 @@ const FormInputValidation = ({
 type FormProps = {
   handleToggleModal?: () => void;
   handleSelectHead: (num: number) => void;
-  handleSelectViceHeads: (nums: number[]) => void;
+  handleSelectViceHead: (num: number) => void;
   selectedHeadNum: number;
-  selectedViceHeadNums: number[];
+  selectedViceHeadNum: number;
 };
 
 const FormInputVoting = ({
   handleToggleModal,
   handleSelectHead,
-  handleSelectViceHeads,
+  handleSelectViceHead,
   selectedHeadNum,
-  selectedViceHeadNums,
+  selectedViceHeadNum,
 }: FormProps) => {
-  const [tempSelectedViceHeads, setTempSelectedViceHeads] =
-    useState<number[]>(selectedViceHeadNums);
+  const [tempSelectedViceHeadNum, setTempSelectedViceHeadNum] =
+    useState<number>(selectedViceHeadNum);
 
   const handleViceHeadSelection = (num: number) => {
-    if (tempSelectedViceHeads.includes(num)) {
-      setTempSelectedViceHeads(tempSelectedViceHeads.filter((n) => n !== num));
-    } else if (tempSelectedViceHeads.length < 4) {
-      setTempSelectedViceHeads([...tempSelectedViceHeads, num]);
+    if (tempSelectedViceHeadNum === num) {
+      setTempSelectedViceHeadNum(0);
     } else {
-      toast.error("You can only select 4 vice head candidates");
+      setTempSelectedViceHeadNum(num);
     }
   };
 
   const handleConfirmSelection = () => {
     if (selectedHeadNum === 0) {
       toast.error("Please select a head candidate");
-    } else if (tempSelectedViceHeads.length !== 4) {
-      toast.error("Please select exactly 4 vice head candidates");
+    } else if (tempSelectedViceHeadNum === 0) {
+      toast.error("Please select a vice head candidate");
     } else {
-      handleSelectViceHeads(tempSelectedViceHeads);
+      handleSelectViceHead(tempSelectedViceHeadNum);
       handleToggleModal?.();
     }
   };
@@ -502,13 +498,14 @@ const FormInputVoting = ({
         <h2 className="mt-8 text-center text-2xl font-bold">
           Vice Head Candidates
         </h2>
-        <p className="mt-2 text-center">Select 4 candidates</p>
+        <p className="mt-2 text-center">Select 1 candidate</p>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
           {viceHeadCandidates.map((candidate, idx) => {
-            const isSelected = tempSelectedViceHeads.includes(candidate.num);
+            const isSelected = tempSelectedViceHeadNum === candidate.num;
             return (
               <div
-                className={`relative mx-auto mb-6 aspect-[3/4] h-[300px] cursor-pointer rounded-3xl border-2 p-3 text-gray-800 hover:opacity-80 ${"border-black bg-[#EA7227]"}`}
+                className={`} relative mx-auto mb-6 aspect-[3/4] h-[300px] cursor-pointer rounded-3xl border-2 border-black bg-[#EA7227] p-3 text-gray-800 
+                hover:opacity-80`}
                 key={idx}
                 onClick={() => handleViceHeadSelection(candidate.num)}
               >
@@ -554,12 +551,8 @@ const FormInputVoting = ({
         <h1 className="mt-4 text-center text-base font-bold text-white sm:mt-4 sm:text-lg">
           {selectedHeadNum === 0
             ? "Select head candidate"
-            : tempSelectedViceHeads.length !== 4
-            ? `Select ${
-                4 - tempSelectedViceHeads.length
-              } more vice head candidate${
-                4 - tempSelectedViceHeads.length === 1 ? "" : "s"
-              }`
+            : tempSelectedViceHeadNum === 0
+            ? "Select vice head candidate"
             : "Confirm Selection"}
         </h1>
       </div>
@@ -572,13 +565,13 @@ interface IProps {
   handleHideModal: () => void;
   callback: () => Promise<void>;
   chosenHeadNum: number;
-  chosenViceHeadNums: number[];
+  chosenViceHeadNum: number;
 }
 
 function Modal({
   callback,
   chosenHeadNum,
-  chosenViceHeadNums,
+  chosenViceHeadNum,
   handleHideModal,
   isModalVisible,
 }: IProps) {
@@ -627,7 +620,7 @@ function Modal({
                   Head Candidate: Nomor {chosenHeadNum}
                 </p>
                 <p className="text-md font-medium leading-relaxed text-gray-900">
-                  Vice Head Candidates: Nomor {chosenViceHeadNums.join(", ")}
+                  Vice Head Candidate: Nomor {chosenViceHeadNum}
                 </p>
                 <p className="text-md font-medium leading-relaxed text-gray-900">
                   Keputusan ini tidak bisa diulang, pastikan anda sudah memilih
@@ -666,7 +659,7 @@ type SuccessScreenProps = {
   phoneNumber: string;
   voterToken: string;
   headVoteNum: number;
-  viceHeadVoteNums: number[];
+  viceHeadVoteNum: number;
 };
 
 function hideStringExceptLast3Digits(input: string): string {
@@ -679,13 +672,13 @@ function hideStringExceptLast3Digits(input: string): string {
 }
 
 const shareText =
-  "Yuk, jangan lupa untuk menggunakan hak suaranya ya dalam Pemilu IAGD 2023. Berikan suaramu untuk menciptakan perubahan positif bersama-sama! https://www.iagd-itb.com/ ";
+  "Yuk, jangan lupa untuk menggunakan hak suaranya ya dalam Pemilu ISI 2023. Berikan suaramu untuk menciptakan perubahan positif bersama-sama!  ";
 
 const SuccessScreen = ({
   phoneNumber,
   voterToken,
   headVoteNum,
-  viceHeadVoteNums,
+  viceHeadVoteNum,
 }: SuccessScreenProps) => {
   return (
     <div className="bgp h-screen  w-screen overflow-scroll pb-24">
@@ -719,7 +712,7 @@ const SuccessScreen = ({
           Calon Ketua Nomor {headVoteNum}
         </p>
         <p className="mt-2 text-center text-xl text-white">
-          Calon Wakil Ketua Nomor {viceHeadVoteNums.join(", ")}
+          Calon Wakil Ketua Nomor {viceHeadVoteNum}
         </p>
         <div className="mt-12 flex justify-between px-8">
           <p className="w-fit text-lg  text-white">Notelp Pemilih</p>
@@ -743,7 +736,7 @@ const SuccessScreen = ({
                 <WhatsappIcon />
               </div>
               <p className="">
-                Ajak temanmu untuk ikut menggunakan suaranya di Pemilu IAGD!
+                Ajak temanmu untuk ikut menggunakan suaranya di Pemilu ISI!
               </p>
             </div>
           </Link>
